@@ -1,0 +1,24 @@
+{
+  "name": "framgia_event",
+  "description": "",
+  "main": "",
+  "authors": [
+    "trungquan17 <quanlightning17@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/trungquan17/framgia_event",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "https://github.com/twbs/bootstrap.git#^3.3.7",
+    "jquery-flexdatalist": "https://github.com/sergiodlopes/jquery-flexdatalist.git#^2.2.2",
+    "font-awesome": "https://github.com/FortAwesome/Font-Awesome.git#^4.7.0",
+    "font-icons-trungquan17": "https://github.com/trungquan17/font-icons.git"
+  }
+}

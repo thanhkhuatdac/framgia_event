@@ -12,6 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('front.main_layouts.master');
+});
+Route::get('/home', function () {
+    echo "a";
 });
 
