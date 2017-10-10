@@ -7,9 +7,11 @@
     <div class="modal-body">
         <div class="row gap-20">
             <div class="col-sm-6 col-md-6">
-                <button class="btn btn-facebook btn-block mb-5-xs">
-                    {{ trans('login.fb') }}
-                </button>
+                <a href="{{route('socialRedirect', 'facebook')}}">
+                    <button class="btn btn-facebook btn-block mb-5-xs">
+                        {{ trans('login.fb') }}
+                    </button>
+                </a>
             </div>
             <div class="col-sm-6 col-md-6">
                 <button class="btn btn-google-plus btn-block">

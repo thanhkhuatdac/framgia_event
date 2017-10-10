@@ -17,6 +17,10 @@ Route::group(['prefix' => 'event-plan'], function () {
     Route::get('/', 'EventPlanController@getIndex')->name('eventPlanIndex');
 });
 
-Route::group(['prefix' => 'profile'], function () {
+Route::group(['prefix' => 'user'], function () {
     Route::get('/', 'UserController@getProfile')->name('userProfile');
+    Route::get('redirect/{social}', 'UserController@redirect')
+        ->name('socialRedirect');
+    Route::get('callback/{social}', 'UserController@callback')
+        ->name('socialCalllBack');
 });

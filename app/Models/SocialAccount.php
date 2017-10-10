@@ -14,6 +14,7 @@ class SocialAccount extends Model
     protected $fillable = [
         'social_type',
         'social_id',
+        'user_id',
     ];
 
     public function toUser()
