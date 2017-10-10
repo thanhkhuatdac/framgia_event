@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('front.main_layouts.master');
-});
-Route::get('/home', function () {
-    echo "a";
+Route::get('/', 'HomeController@getIndex')->name('home');
+
+Route::group(['prefix' => 'event-plan'], function () {
+    Route::get('/', 'EventPlanController@getIndex')->name('eventPlanIndex');
 });
 
+Route::group(['prefix' => 'profile'], function () {
+    Route::get('/', 'UserController@getProfile')->name('userProfile');
+});
