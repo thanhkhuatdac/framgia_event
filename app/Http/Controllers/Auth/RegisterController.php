@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -49,8 +49,24 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'r_email' => 'required|string|email|max:255|unique:users,email',
+            'r_password' => 'required|string|min:6',
+            'password_confirmation' =>'required|same:r_password',
+            'phone' => 'required|min:10|unique:users,phone',
+            'role' => 'required|in:freelancer,customer',
+        ], [
+            'r_email.required' => 'The email field is required.',
+            'r_email.string' => 'The email must be a valid email address.',
+            'r_email.email' => 'The email must be a valid email address.',
+            'r_email.max' => 'The email max 255 character.',
+            'r_email.unique' => 'The email has been exists.',
+            'r_password.required' => 'The password field is required.',
+            'r_password.string' => 'The password not valid.',
+            'r_password.min' => 'The password min 6 character.',
+            'password_confirmation.required'
+                => 'The password confirmation field is required.',
+            'password_confirmation.same'
+                => 'The password confirmation does not match.',
         ]);
     }
 
@@ -64,8 +80,10 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'email' => $data['r_email'],
+            'password' => bcrypt($data['r_password']),
+            'phone' => $data['phone'],
+            'role' => $data['role'],
         ]);
     }
 }

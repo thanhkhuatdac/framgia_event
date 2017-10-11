@@ -7,7 +7,7 @@ return [
     'or' => 'or',
     'username' => 'Username',
     'username_place' => 'Min 4 and Max 10 characters',
-    'email' => 'Email Address',
+    'email' => 'E-Mail Address',
     'email_place' => 'Enter your email address',
     'password' => 'Password',
     'password_place' => 'Min 8 and Max 20 characters',
@@ -20,4 +20,9 @@ return [
     'login' => 'Log-in',
     'register' => 'Register',
     'close' => 'Close',
+    'phone' => 'Phone',
+    'phone_place' => 'Enter your phone number',
+    'role' => 'Position do you want?',
+    'freelancer' => 'Freelancer',
+    'customer' => 'Customer',
 ];
