@@ -1,0 +1,10 @@
+#register-role label {
+    padding: 1px 0 0 17px;
+    margin-left: 15px;
+}
+#register-role span {
+    font-weight: bold;
+}
+#logout-form {
+    display: none;
+}

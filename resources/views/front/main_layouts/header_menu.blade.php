@@ -35,8 +35,22 @@
             </div>
             <div class="nav-mini-wrapper">
                 <ul class="nav-mini">
+                    @if(!Auth::check())
                     <li><a data-toggle="modal" href="#registerModal"><i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" title="sign up"></i></a></li>
-                    <li><a data-toggle="modal" href="#loginModal"><i class="icon-login" data-toggle="tooltip" data-placement="bottom" title="login"></i> </a></li>
+                        <li><a data-toggle="modal" href="#loginModal"><i class="icon-login" data-toggle="tooltip" data-placement="bottom" title="login"></i> </a></li>
+                    @else
+                        <li><a data-toggle="modal" href="#">
+                            <i class="icon-user" data-toggle="tooltip" data-placement="bottom" title="{{ Auth::user()->name }}"></i>
+                        </a></li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            {{ csrf_field() }}
+                        </form>
+                        <li>
+                            <a data-toggle="modal" href="javascript:void(0)" onclick="logout()">
+                                <i class="icon-logout" data-toggle="tooltip" data-placement="bottom" title="logout"></i>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
