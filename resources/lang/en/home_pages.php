@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'bannerTitle01' => 'What event do you want to hosting?',
+    'bannerTitle01' => 'What event do you want to hold?',
     'topSearches' => 'Top Searches :',
     'wedding' => 'Wedding',
     'birthday' => 'Birthday',
