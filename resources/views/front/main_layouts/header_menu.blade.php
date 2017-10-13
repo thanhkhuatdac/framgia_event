@@ -3,13 +3,15 @@
         <div class="container">
             <div class="logo-wrapper">
                 <div class="logo">
-                    <a href="#"><img src="{{config('asset.image_path.logo_fav')}}logo-trungquandev.png" alt="Logo" /></a>
+                    <a href="#">
+                        {{ HTML::image(config('asset.image_path.logo_fav') . '/logo-trungquandev.png', 'Logo', ['class' => 'thumb']) }}
+                    </a>
                 </div>
             </div>
             <div id="navbar" class="navbar-nav-wrapper">
                 <ul class="nav navbar-nav" id="responsive-menu">
                     <li>
-                        <a href="">{{ trans('header_menu.home') }}</a>
+                        <a href="{{ route('home') }}">{{ trans('header_menu.home') }}</a>
                     </li>
                     <li>
                         <a href="javascript:void(0)">
@@ -36,7 +38,7 @@
             <div class="nav-mini-wrapper">
                 <ul class="nav-mini">
                     @if(!Auth::check())
-                    <li><a data-toggle="modal" href="#registerModal"><i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" title="sign up"></i></a></li>
+                        <li><a data-toggle="modal" href="#registerModal"><i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" title="sign up"></i></a></li>
                         <li><a data-toggle="modal" href="#loginModal"><i class="icon-login" data-toggle="tooltip" data-placement="bottom" title="login"></i> </a></li>
                     @else
                         <li><a data-toggle="modal" href="#">

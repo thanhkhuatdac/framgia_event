@@ -24,4 +24,7 @@ Route::group(['prefix' => 'user'], function () {
         ->name('socialRedirect');
     Route::get('callback/{social}', 'UserController@callback')
         ->name('socialCalllBack');
+    Route::group(['prefix' => 'dashboard', 'middleware' => 'AuthUser'], function () {
+        Route::get('/', 'UserController@getDashboard')->name('userDashboard');
+    });
 });
