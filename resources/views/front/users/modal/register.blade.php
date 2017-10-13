@@ -23,9 +23,9 @@
                         <label>{{ trans('register.username') }}</label>
                         <input id="name" class="form-control" placeholder="{{ trans('register.username_place') }}" type="text" name="name" value="{{ old('name') }}">
                         @if ($errors->has('name'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('name') }}</strong>
-                        </span>
+                            <span class="help-block">
+                                <strong>{{ $errors->first('name') }}</strong>
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -34,9 +34,9 @@
                         <label>{{ trans('register.email') }}</label>
                         <input id="email" class="form-control" placeholder="{{ trans('register.email_place') }}" type="text" name="r_email" value="{{ old('r_email') }}">
                         @if ($errors->has('r_email'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('r_email') }}</strong>
-                        </span>
+                            <span class="help-block">
+                                <strong>{{ $errors->first('r_email') }}</strong>
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -45,9 +45,9 @@
                         <label>{{ trans('register.password') }}</label>
                         <input id="password" class="form-control" placeholder="{{ trans('register.password_place') }}" type="password" name="r_password">
                         @if ($errors->has('r_password'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('r_password') }}</strong>
-                        </span>
+                            <span class="help-block">
+                                <strong>{{ $errors->first('r_password') }}</strong>
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -56,9 +56,9 @@
                         <label>{{ trans('register.confirm') }}</label>
                         <input id="password-confirm" class="form-control" placeholder="{{ trans('register.confirm_place') }}" type="password" name="password_confirmation">
                         @if ($errors->has('password_confirmation'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                        </span>
+                            <span class="help-block">
+                                <strong>{{ $errors->first('password_confirmation') }}</strong>
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -67,9 +67,9 @@
                         <label>{{ trans('register.phone') }}</label>
                         <input id="phone" class="form-control" placeholder="{{ trans('register.phone_place') }}" type="text" name="phone" value="{{ old('phone') }}">
                         @if ($errors->has('phone'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('phone') }}</strong>
-                        </span>
+                            <span class="help-block">
+                                <strong>{{ $errors->first('phone') }}</strong>
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -81,9 +81,9 @@
                         <input type="radio" id="customer-role" name="role"  value="customer" class="form-control">
                         <label for="customer-role">{{ trans('register.customer') }}</label>
                         @if ($errors->has('role'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('role') }}</strong>
-                        </span>
+                            <span class="help-block">
+                                <strong>{{ $errors->first('role') }}</strong>
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                     <div class="login-box-box-action">
                         {{ trans('register.already') }}
                         <a data-toggle="modal" href="#loginModal">
-                        {{ trans('register.login') }}
+                            {{ trans('register.login') }}
                         </a>
                     </div>
                 </div>
@@ -106,10 +106,10 @@
         </div>
         <div class="modal-footer text-center">
             <button type="submit" class="btn btn-primary">
-            {{ trans('register.register') }}
+                {{ trans('register.register') }}
             </button>
             <button type="button" data-dismiss="modal" class="btn btn-primary btn-border">
-            {{ trans('register.close') }}
+                {{ trans('register.close') }}
             </button>
         </div>
     </form>

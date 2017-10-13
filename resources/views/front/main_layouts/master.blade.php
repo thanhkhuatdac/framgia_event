@@ -7,7 +7,7 @@
     <title>{{ config('app.name') }} | @yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon"
-        href="{{asset('images/favicon/logo-trungquandev.png')}}" />
+        href="{{config('asset.image_path.logo_fav')}}favicon-trungquandev.png" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{ Html::style('assets/bootstrap/dist/css/bootstrap.css') }}
@@ -15,7 +15,7 @@
     {{ Html::style('css/main.css') }}
     {{ Html::style('css/plugin.css') }}
     {{ Html::style('css/style.css') }}
-    {{ Html::style('css/trungquan.css') }}
+    {{ Html::style('css/my-custom.css') }}
 </head>
 <body class="home transparent-header">
     {{-- <div id="introLoader" class="introLoading"></div> --}}
@@ -43,7 +43,7 @@
     {{ Html::script('js/core-plugins.js') }}
     {{ Html::script('js/customs.js') }}
     {{ Html::script('assets/jquery-flexdatalist/jquery.flexdatalist.js') }}
-    {{ Html::script('js/trungquan.js') }}
+    {{ Html::script('js/my-custom.js') }}
 
     @stack('scripts')
     @yield('script')

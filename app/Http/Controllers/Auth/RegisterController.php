@@ -55,18 +55,18 @@ class RegisterController extends Controller
             'phone' => 'required|min:10|unique:users,phone',
             'role' => 'required|in:freelancer,customer',
         ], [
-            'r_email.required' => 'The email field is required.',
-            'r_email.string' => 'The email must be a valid email address.',
-            'r_email.email' => 'The email must be a valid email address.',
-            'r_email.max' => 'The email max 255 character.',
-            'r_email.unique' => 'The email has been exists.',
-            'r_password.required' => 'The password field is required.',
-            'r_password.string' => 'The password not valid.',
-            'r_password.min' => 'The password min 6 character.',
+            'r_email.required' => trans('register.email_req'),
+            'r_email.string' => trans('register.email_str'),
+            'r_email.email' => trans('register.email_e'),
+            'r_email.max' => trans('register.email_max'),
+            'r_email.unique' => trans('register.email_unique'),
+            'r_password.required' => trans('register.password_req'),
+            'r_password.string' => trans('register.password_str'),
+            'r_password.min' => trans('register.password_min'),
             'password_confirmation.required'
-                => 'The password confirmation field is required.',
+                => trans('register.password_conf_req'),
             'password_confirmation.same'
-                => 'The password confirmation does not match.',
+                => trans('register.password_conf_same'),
         ]);
     }
 

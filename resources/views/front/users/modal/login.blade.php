@@ -14,13 +14,13 @@
             <div class="col-sm-6 col-md-6">
                 <a href="{{route('socialRedirect', 'facebook')}}">
                 <button class="btn btn-facebook btn-block mb-5-xs">
-                {{ trans('login.fb') }}
+                    {{ trans('login.fb') }}
                 </button>
                 </a>
             </div>
             <div class="col-sm-6 col-md-6">
                 <button class="btn btn-google-plus btn-block">
-                {{ trans('login.google') }}
+                    {{ trans('login.google') }}
                 </button>
             </div>
             <div class="col-md-12">
@@ -35,9 +35,9 @@
                         <label>{{ trans('login.email') }}</label>
                         <input id="email" type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="{{ trans('login.email_place') }}">
                         @if ($errors->has('email'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
-                        </span>
+                            <span class="help-block">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -46,9 +46,9 @@
                         <label>{{ trans('login.password') }}</label>
                         <input id="password" name="password" class="form-control" placeholder="{{ trans('login.password_place') }}" type="password">
                         @if ($errors->has('password'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                        </span>
+                            <span class="help-block">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <div class="checkbox-block">
                         <input id="remember_me_checkbox" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
                         <label class="" for="remember_me_checkbox">
-                        {{ trans('login.remember') }}
+                            {{ trans('login.remember') }}
                         </label>
                     </div>
                 </div>
@@ -77,10 +77,10 @@
         </div>
     </div>
     <div class="modal-footer text-center">
-    <button type="submit" class="btn btn-primary">{{ trans('login.login') }}</button>
-    <button type="button" data-dismiss="modal" class="btn btn-primary btn-border">
-        {{ trans('login.close') }}
-    </button>
+        <button type="submit" class="btn btn-primary">{{ trans('login.login') }}</button>
+        <button type="button" data-dismiss="modal" class="btn btn-primary btn-border">
+            {{ trans('login.close') }}
+        </button>
     </div>
     </form>
 </div>
