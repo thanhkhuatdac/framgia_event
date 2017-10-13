@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(EventFork::class);
     }
+
+    public function scopeGetUser($query, $id)
+    {
+        return $query->where('id', $id);
+    }
 }

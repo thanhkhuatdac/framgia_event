@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }} | @yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon"
-        href="{{config('asset.image_path.logo_fav')}}favicon-trungquandev.png" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{ Html::favicon(config('asset.image_path.logo_fav') . '/favicon-trungquandev.png') }}
 
     {{ Html::style('assets/bootstrap/dist/css/bootstrap.css') }}
     {{ Html::style('assets/font-awesome/css/font-awesome.css') }}
