@@ -17,7 +17,7 @@ class SocialAccount extends Model
         'user_id',
     ];
 
-    public function toUser()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

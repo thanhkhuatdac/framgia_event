@@ -11,17 +11,17 @@ class RequestEvent extends Model
 
     protected $table = 'request_events';
 
-    public function toUser()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function toSubject()
+    public function subject()
     {
         return $this->belongsTo(Subject::class);
     }
 
-    public function toComments()
+    public function comments()
     {
         return $this->morphMany(Comment::class);
     }

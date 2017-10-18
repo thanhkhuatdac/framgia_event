@@ -19,12 +19,14 @@ Route::group(['prefix' => 'event-plan'], function () {
 });
 
 Route::group(['prefix' => 'user'], function () {
-    Route::get('/', 'UserController@getProfile')->name('userProfile');
+    Route::get('/{id}', 'UserController@getProfile')->name('userProfile');
     Route::get('redirect/{social}', 'UserController@redirect')
         ->name('socialRedirect');
     Route::get('callback/{social}', 'UserController@callback')
         ->name('socialCalllBack');
-    Route::group(['prefix' => 'dashboard', 'middleware' => 'AuthUser'], function () {
+    Route::group(['prefix' => 'dashboard/{id}', 'middleware' => 'AuthUser'], function () {
         Route::get('/', 'UserController@getDashboard')->name('userDashboard');
+        Route::get('events', 'UserController@getDashboardEvents')
+            ->name('userDashboardEvents');
     });
 });

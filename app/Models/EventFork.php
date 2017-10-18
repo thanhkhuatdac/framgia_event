@@ -11,17 +11,17 @@ class EventFork extends Model
 
     protected $table = 'event_forks';
 
-    public function toUser()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function toEventPlan()
+    public function eventPlan()
     {
         return $this->belongsTo(EventPlan::class);
     }
 
-    public function toEventForkDetails()
+    public function eventForkDetails()
     {
         return $this->hasMany(EventForkDetail::class);
     }

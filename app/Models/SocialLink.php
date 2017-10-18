@@ -11,7 +11,7 @@ class SocialLink extends Model
 
     protected $table = 'social_links';
 
-    public function toUser()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

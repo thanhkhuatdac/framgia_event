@@ -11,17 +11,17 @@ class Review extends Model
 
     protected $table = 'reviews';
 
-    public function toUser()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function toEventPlan()
+    public function eventPlan()
     {
         return $this->belongsTo(EventPlan::class);
     }
 
-    public function toComments()
+    public function comments()
     {
         return $this->morphMany(Comment::class);
     }

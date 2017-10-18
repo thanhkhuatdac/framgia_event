@@ -2,7 +2,7 @@
     <aside class="sidebar-wrapper pr-15 pr-0-xs">
         <div class="common-menu-wrapper">
             <ul class="common-menu-list">
-                <li class="active"><a href="guide-detail-setting.html">
+                <li class="active"><a href="{{ route('userDashboard', Auth::user()->id) }}">
                     {{ trans('dashboard_menu.dashboard') }}
                 </a></li>
                 <li><a href="guide-detail-setting-edit-profile.html">
@@ -11,7 +11,7 @@
                 <li><a href="guide-detail-setting-change-pass.html">
                     {{ trans('dashboard_menu.changePassword') }}
                 </a></li>
-                <li><a href="guide-detail-setting-my-tour.html">
+                <li><a href="{{ route('userDashboardEvents', Auth::user()->id) }}">
                     {{ trans('dashboard_menu.myEvents') }}
                 </a></li>
                 <li><a href="#">

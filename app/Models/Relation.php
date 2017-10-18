@@ -11,7 +11,7 @@ class Relation extends Model
 
     protected $table = 'relations';
 
-    public function toUser()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

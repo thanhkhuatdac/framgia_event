@@ -11,12 +11,12 @@ class Subject extends Model
 
     protected $table = 'subjects';
 
-    public function toEventPlans()
+    public function eventPlans()
     {
         return $this->hasMany(EventPlan::class);
     }
 
-    public function toRequestEvents()
+    public function requestEvents()
     {
         return $this->hasMany(RequestEvent::class);
     }

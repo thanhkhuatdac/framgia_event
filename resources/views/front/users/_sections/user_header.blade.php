@@ -5,7 +5,7 @@
                 <div class="container">
                     <div class="inner-top">
                         <div class="image">
-                            <img src="{{ asset(config('asset.image_path.user_ava').$user->image) }}" alt="image" />
+                            {{ Html::image(config('asset.image_path.user_ava') . $user->image, $user->name) }}
                         </div>
                         <div class="GridLex-gap-20">
                             <div class="GridLex-grid-noGutter-equalHeight GirdLex-grid-bottom">
@@ -53,7 +53,7 @@
                 <div class="container">
                     <div class="inner-bottom">
                         <ul class="user-header-menu">
-                            <li class="active"><a href="guide-detail.html">
+                            <li class="active"><a href="{{ route('userProfile', $user->id) }}">
                                 {{ trans('user_header.profile') }}
                             </a></li>
                             <li><a href="guide-detail-offer.html">
@@ -68,7 +68,7 @@
                             <li><a href="guide-detail-follower.html">
                                 {{ trans('user_header.followers') }} <span></span>
                             </a></li>
-                            <li><a href="{{ route('userDashboard') }}">
+                            <li><a href="{{route('userDashboard', $user->id)}}">
                                 {{ trans('user_header.dashboard') }}
                             </a></li>
                         </ul>
