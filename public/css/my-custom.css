@@ -14,3 +14,35 @@
 .spaceY70 {
     margin-top: 70px;
 }
+.spaceY40 {
+    margin-top: 40px;
+}
+.spaceY10 {
+    margin-top: 10px;
+}
+.spaceL20 {
+    margin-left: 20px;
+}
+.alignCenter {
+    text-align: center;
+}
+.form-control[readonly] {
+    border: 1px solid #e67e22;
+}
+#select-subjects, #select-categories {
+    width: 90%;
+    float:left;
+}
+#remove-subject, #remove-category {
+    display: none;
+    float: left;
+    font-size: 20px;
+    margin: 5px;
+}
+#create-subject, #create-category {
+    display: none;
+}
+#create-subject input, #create-category input {
+    width: 70%;
+    float: left;
+}

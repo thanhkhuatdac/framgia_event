@@ -20,4 +20,9 @@ class Subject extends Model
     {
         return $this->hasMany(RequestEvent::class);
     }
+
+    public function scopeGetAllSubjects($query)
+    {
+        return $query->get();
+    }
 }
