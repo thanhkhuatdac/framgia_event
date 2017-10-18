@@ -11,28 +11,33 @@ class EventPlan extends Model
 
     protected $table = 'event_plans';
 
-    public function toUser()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function toSubject()
+    public function subject()
     {
         return $this->belongsTo(Subject::class);
     }
 
-    public function toReviews()
+    public function reviews()
     {
         return $this->hasMany(Review::class);
     }
 
-    public function toEventForks()
+    public function eventForks()
     {
         return $this->hasMany(EventFork::class);
     }
 
-    public function toEventPlanDetails()
+    public function eventPlanDetails()
     {
         return $this->hasMany(EventPlanDetail::class);
+    }
+
+    public function scopeGetUserEventPlans($query, $id)
+    {
+        return $query->where('user_id', $id);
     }
 }

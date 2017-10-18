@@ -11,12 +11,12 @@ class EventPlanDetail extends Model
 
     protected $table = 'event_plan_details';
 
-    public function toEventPlan()
+    public function eventPlan()
     {
         return $this->belongsTo(EventPlan::class);
     }
 
-    public function toServices()
+    public function services()
     {
         return $this->hasMany(Service::class);
     }

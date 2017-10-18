@@ -28,42 +28,42 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function toSocialAccounts()
+    public function socialAccounts()
     {
         return $this->hasMany(SocialAccount::class);
     }
 
-    public function toRelations()
+    public function relations()
     {
         return $this->hasMany(Relation::class);
     }
 
-    public function toSocialLinks()
+    public function socialLinks()
     {
         return $this->hasMany(SocialLink::class);
     }
 
-    public function toEventPlans()
+    public function eventPlans()
     {
         return $this->hasMany(EventPlan::class);
     }
 
-    public function toRequestEvents()
+    public function requestEvents()
     {
         return $this->hasMany(RequestEvent::class);
     }
 
-    public function toReviews()
+    public function reviews()
     {
         return $this->hasMany(Review::class);
     }
 
-    public function toComments()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    public function toEventForks()
+    public function eventForks()
     {
         return $this->hasMany(EventFork::class);
     }

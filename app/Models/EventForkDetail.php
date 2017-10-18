@@ -11,12 +11,12 @@ class EventForkDetail extends Model
 
     protected $table = 'event_fork_details';
 
-    public function toEventFork()
+    public function eventFork()
     {
         return $this->belongsTo(EventFork::class);
     }
 
-    public function toServices()
+    public function services()
     {
         return $this->hasMany(Service::class);
     }

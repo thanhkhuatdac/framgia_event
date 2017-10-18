@@ -41,7 +41,7 @@
                         <li><a data-toggle="modal" href="#registerModal"><i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" title="sign up"></i></a></li>
                         <li><a data-toggle="modal" href="#loginModal"><i class="icon-login" data-toggle="tooltip" data-placement="bottom" title="login"></i> </a></li>
                     @else
-                        <li><a data-toggle="modal" href="#">
+                        <li><a data-toggle="modal" href="{{ route('userDashboard', Auth::user()->id) }}">
                             <i class="icon-user" data-toggle="tooltip" data-placement="bottom" title="{{ Auth::user()->name }}"></i>
                         </a></li>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
