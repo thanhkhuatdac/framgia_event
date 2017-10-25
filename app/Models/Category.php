@@ -15,4 +15,9 @@ class Category extends Model
     {
         return $this->hasMany(Service::class);
     }
+
+    public function scopeGetAllCategories($query)
+    {
+        return $query->get();
+    }
 }

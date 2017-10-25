@@ -10,7 +10,11 @@
             <div class="col-xs-12 col-sm-8 col-md-9 mt-20">
                 <div class="dashboard-wrapper">
                     <h4 class="section-title">{{ trans('dashboard_event_plans.title') }}</h4>
-                    <p class="mmt-15 mb-20">{{ trans('dashboard_event_plans.description') }}</p>
+                    <p class="mmt-15 mb-20">
+                        <a href="{{ route('userDashboardCreateNewEvent', $user->id) }}" class="btn btn-primary btn-sm">
+                            {{ trans('dashboard_event_plans.create') }}
+                        </a>
+                    </p>
                     <div class="trip-list-wrapper no-bb-last">
                         @foreach($eventPlans as $eventPlan)
                             <div class="trip-list-item">

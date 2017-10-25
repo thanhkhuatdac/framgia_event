@@ -70,6 +70,6 @@ class User extends Authenticatable
 
     public function scopeGetUser($query, $id)
     {
-        return $query->where('id', $id);
+        return $query->where('id', $id)->first();
     }
 }

@@ -24,9 +24,21 @@ Route::group(['prefix' => 'user'], function () {
         ->name('socialRedirect');
     Route::get('callback/{social}', 'UserController@callback')
         ->name('socialCalllBack');
+
     Route::group(['prefix' => 'dashboard/{id}', 'middleware' => 'AuthUser'], function () {
         Route::get('/', 'UserController@getDashboard')->name('userDashboard');
-        Route::get('events', 'UserController@getDashboardEvents')
-            ->name('userDashboardEvents');
+
+        Route::group(['prefix' => 'event'], function () {
+            Route::get('/', 'UserController@getDashboardEvents')
+                ->name('userDashboardEvents');
+            Route::get('create-new', 'UserController@getDashboardCreateEvent')
+                ->name('userDashboardCreateNewEvent');
+            Route::get('create-detail', 'UserController@getCreateEventDetail')
+                ->name('userDashboardCreateEventDetail');
+            Route::get('create-service', 'UserController@getCreateEventService')
+                ->name('userDashboardCreateEventService');
+            Route::post('create-service', 'UserController@postCreateEventService')
+                ->name('userDashboardCreateEventService');
+        });
     });
 });
