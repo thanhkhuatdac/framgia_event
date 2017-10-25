@@ -37,8 +37,8 @@ Route::group(['prefix' => 'user'], function () {
                 ->name('userDashboardCreateEventDetail');
             Route::get('create-service', 'UserController@getCreateEventService')
                 ->name('userDashboardCreateEventService');
-            Route::post('create-service', 'UserController@postCreateEventService')
-                ->name('userDashboardCreateEventService');
+            Route::post('post-create-service', 'UserController@postCreateEventService')
+                ->name('userDashboardPostCreateEventService');
         });
     });
 });
