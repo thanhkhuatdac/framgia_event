@@ -129,8 +129,21 @@ $(document).ready(function ($) {
                         },
                         success: function(result)
                         {
-                            // console.log(result);
-                            // xử lý tiếp ở pull sau
+                            console.log(result);
+                            $.each( result, function( key, value ) {
+                                 var liTag = $("<li class='list-group-item'></li>");
+                                 var display = value['name']+': '+value['price'];
+                                 liTag.html(display);
+                                $( "#service-results" ).prepend(liTag);
+                            });
+                            // $( "#detail-amount" ).html('$'+value['price']);
+                        },
+                        error: function (data) {
+                            console.log(data);
+                            var notification = alertify.notify(data.responseJSON.message, 'error', 5, function() {
+
+                            });
+                            console.log(data);
                         }
                     });
                 });

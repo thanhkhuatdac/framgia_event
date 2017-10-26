@@ -1,3 +1,5 @@
+<ul id="service-results" class="list-group"></ul>
+
 <form action="" id="frmAddService" method="post" accept-charset="utf-8">
     <div class="col-xs-12 col-sm-6 col-md-4">
         <div class="form-group">

@@ -46,6 +46,14 @@
                                         <input type="text" class="form-control" value="" />
                                     </div>
                                 </div>
+                                <div class="col-xs-12 col-sm-6 col-md-7">
+                                    <div class="form-group">
+                                        <label class="floatLeft">
+                                            {{ trans('dashboard_create_detail.amount') }}
+                                        </label>
+                                        <div id="detail-amount" class="floatLeft"></div>
+                                    </div>
+                                </div>
                             </div>
                             <hr>
                             <div class="clear"></div>

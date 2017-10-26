@@ -10,6 +10,7 @@
 
     {{ Html::style('assets/bootstrap/dist/css/bootstrap.css') }}
     {{ Html::style('assets/font-awesome/css/font-awesome.css') }}
+    {{ Html::style('assets/AlertifyJS/build/css/alertify.css') }}
     {{ Html::style('css/main.css') }}
     {{ Html::style('css/plugin.css') }}
     {{ Html::style('css/style.css') }}
@@ -41,6 +42,7 @@
     {{ Html::script('js/core-plugins.js') }}
     {{ Html::script('js/customs.js') }}
     {{ Html::script('assets/jquery-flexdatalist/jquery.flexdatalist.js') }}
+    {{ Html::script('assets/AlertifyJS/build/alertify.js') }}
     {{ Html::script('js/my-custom.js') }}
 
     @stack('scripts')

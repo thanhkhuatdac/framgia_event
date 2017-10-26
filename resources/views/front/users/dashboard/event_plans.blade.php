@@ -20,7 +20,7 @@
                             <div class="trip-list-item">
                                 <div class="image-absolute">
                                     <div class="image image-object-fit image-object-fit-cover">
-                                        {{ Html::image(config('asset.image_path.subject') . $eventPlan->subject->image, $eventPlan->slug) }}
+                                        {{ Html::image(config('asset.image_path.event_plan') . $eventPlan->image, $eventPlan->slug) }}
                                     </div>
                                 </div>
                                 <div class="content">

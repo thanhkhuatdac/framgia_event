@@ -16,8 +16,8 @@ class EventPlanDetail extends Model
         return $this->belongsTo(EventPlan::class);
     }
 
-    public function services()
+    public function forkPlanServices()
     {
-        return $this->hasMany(Service::class);
+        return $this->hasMany(ForkPlanService::class);
     }
 }
