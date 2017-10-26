@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(EventForkDetailsTableSeeder::class);
         // $this->call(CategoriesTableSeeder::class);
         // $this->call(ServicesTableSeeder::class);
+        // $this->call(ForkPlanServicesTableSeeder::class);
     }
 }
 
@@ -70,7 +71,6 @@ class SubjectsTableSeeder extends Seeder
             [
                 'title' => 'Cưới Hỏi',
                 'slug' => 'cuoi-hoi',
-                'image' => 'cuoi-hoi.jpg',
                 'created_at' => new DateTime()
             ]
         ]);
@@ -83,11 +83,12 @@ class EventPlansTableSeeder extends Seeder
     {
         DB::table('event_plans')->insert([
             [
+                'active' => '1',
                 'title' => 'Tổ chức Đám Cưới Trọn Gói',
                 'slug' => 'to-chuc-dam-cuoi-tron-goi',
                 'amount' => '11500000',
                 'content' => '',
-                'album' => '',
+                'image' => 'cuoi-hoi.jpg',
                 'user_id' => '1',
                 'subject_id' => '1',
                 'created_at' => new DateTime()
@@ -123,7 +124,6 @@ class EventPlanDetailsTableSeeder extends Seeder
                 'start_date' => '2017-10-21 06:00:00',
                 'due_date' => '2017-10-21 07:00:00',
                 'amount' => '370000',
-                'status' => '1',
                 'event_plan_id' => '1',
                 'created_at' => new DateTime()
             ], [
@@ -131,7 +131,6 @@ class EventPlanDetailsTableSeeder extends Seeder
                 'start_date' => '2017-10-21 07:00:00',
                 'due_date' => '2017-10-21 08:00:00',
                 'amount' => '800000',
-                'status' => '1',
                 'event_plan_id' => '1',
                 'created_at' => new DateTime()
             ], [
@@ -139,7 +138,6 @@ class EventPlanDetailsTableSeeder extends Seeder
                 'start_date' => '2017-10-21 08:00:00',
                 'due_date' => '2017-10-21 11:00:00',
                 'amount' => '4000000',
-                'status' => '1',
                 'event_plan_id' => '1',
                 'created_at' => new DateTime()
             ], [
@@ -147,7 +145,6 @@ class EventPlanDetailsTableSeeder extends Seeder
                 'start_date' => '2017-10-21 11:00:00',
                 'due_date' => '2017-10-21 12:00:00',
                 'amount' => '3000000',
-                'status' => '1',
                 'event_plan_id' => '1',
                 'created_at' => new DateTime()
             ]
@@ -233,120 +230,175 @@ class ServicesTableSeeder extends Seeder
                 'price' => '1000000',
                 'description' => 'nhan vien trang tri',
                 'category_id' => '1',
-                'event_plan_detail_id' => '1',
-                'event_fork_detail_id' => '1',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Bàn ghế',
                 'price' => '2000000',
                 'description' => 'ban ghe',
                 'category_id' => '3',
-                'event_plan_detail_id' => '1',
-                'event_fork_detail_id' => '1',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Vải phủ bàn',
                 'price' => '500000',
                 'description' => 'vai phu ban',
                 'category_id' => '3',
-                'event_plan_detail_id' => '1',
-                'event_fork_detail_id' => '1',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Bóng bay',
                 'price' => '200000',
                 'description' => 'bong bay',
                 'category_id' => '3',
-                'event_plan_detail_id' => '1',
-                'event_fork_detail_id' => '1',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Mâm đựng hoa quả',
                 'price' => '200000',
                 'description' => 'mam dung hoa qua',
                 'category_id' => '3',
-                'event_plan_detail_id' => '2',
-                'event_fork_detail_id' => '2',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Hoa',
                 'price' => '200000',
                 'description' => 'hoa',
                 'category_id' => '2',
-                'event_plan_detail_id' => '2',
-                'event_fork_detail_id' => '2',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Quả',
                 'price' => '200000',
                 'description' => 'mam dung hoa qua',
                 'category_id' => '2',
-                'event_plan_detail_id' => '2',
-                'event_fork_detail_id' => '2',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Thuê nhân viên',
                 'price' => '200000',
                 'description' => 'thue nhan vien',
                 'category_id' => '1',
-                'event_plan_detail_id' => '2',
-                'event_fork_detail_id' => '2',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Thuê MC dẫn chương trình',
                 'price' => '1000000',
                 'description' => 'thue mc dan chuong trinh',
                 'category_id' => '1',
-                'event_plan_detail_id' => '3',
-                'event_fork_detail_id' => '3',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Loa đài ánh sáng',
                 'price' => '1000000',
                 'description' => 'loa dai anh sang',
                 'category_id' => '4',
-                'event_plan_detail_id' => '3',
-                'event_fork_detail_id' => '3',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Vũ đoàn (hát nhảy)',
                 'price' => '1000000',
                 'description' => 'vu doan hat nhay',
                 'category_id' => '1',
-                'event_plan_detail_id' => '3',
-                'event_fork_detail_id' => '3',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Quay phim chụp hình',
                 'price' => '1000000',
                 'description' => 'quay phim chup hinh',
                 'category_id' => '1',
-                'event_plan_detail_id' => '3',
-                'event_fork_detail_id' => '3',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Thuê đầu bếp',
                 'price' => '1000000',
                 'description' => 'thue dau bep',
                 'category_id' => '1',
-                'event_plan_detail_id' => '4',
-                'event_fork_detail_id' => '4',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Thuê phục vụ bàn và dọn dẹp',
                 'price' => '1000000',
                 'description' => 'thue phuc vu ban va don dep',
                 'category_id' => '1',
-                'event_plan_detail_id' => '4',
-                'event_fork_detail_id' => '4',
                 'created_at' => new DateTime()
             ], [
                 'name' => 'Chi phí đồ ăn',
                 'price' => '1000000',
                 'description' => 'chi phi do an',
                 'category_id' => '2',
-                'event_plan_detail_id' => '4',
-                'event_fork_detail_id' => '4',
+                'created_at' => new DateTime()
+            ]
+        ]);
+    }
+}
+
+class ForkPlanServicesTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('fork_plan_services')->insert([
+            [
+                'service_id' => '1',
+                'plan_id' => '1',
+                'fork_id' => '1',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '2',
+                'plan_id' => '1',
+                'fork_id' => '1',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '3',
+                'plan_id' => '1',
+                'fork_id' => '1',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '4',
+                'plan_id' => '1',
+                'fork_id' => '1',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '5',
+                'plan_id' => '2',
+                'fork_id' => '2',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '6',
+                'plan_id' => '2',
+                'fork_id' => '2',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '7',
+                'plan_id' => '2',
+                'fork_id' => '2',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '8',
+                'plan_id' => '2',
+                'fork_id' => '2',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '9',
+                'plan_id' => '3',
+                'fork_id' => '3',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '10',
+                'plan_id' => '3',
+                'fork_id' => '3',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '11',
+                'plan_id' => '3',
+                'fork_id' => '3',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '12',
+                'plan_id' => '3',
+                'fork_id' => '3',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '13',
+                'plan_id' => '4',
+                'fork_id' => '4',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '14',
+                'plan_id' => '4',
+                'fork_id' => '4',
+                'created_at' => new DateTime()
+            ], [
+                'service_id' => '15',
+                'plan_id' => '4',
+                'fork_id' => '4',
                 'created_at' => new DateTime()
             ]
         ]);

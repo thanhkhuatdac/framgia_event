@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use App\Services\SocialAccountService;
 use Socialite;
 use Auth;
+use Response;
+use Validator;
 use App\Models\User;
 use App\Models\EventPlan;
 use App\Models\Subject;
 use App\Models\Category;
+use App\Models\Service;
 
 class UserController extends Controller
 {
@@ -75,6 +78,36 @@ class UserController extends Controller
         if (!$request->ajax()) {
             return view('errors.403');
         }
-        // continue next pull
+
+        $validator = Validator::make($request->all(), [
+                'name' => 'required|unique:services,name'
+            ], [
+                'name.required' => 'Services name required',
+                'name.unique' => 'Service name already exists!'
+            ]);
+
+        $service = new Service();
+        $service->name = $request->input('name');
+        $service->price = $request->input('price');
+        $service->description = $request->input('description');
+
+        if ($request->input('category') != 'new') {
+            $service->category_id = $request->input('category');
+        } else {
+            $category = new Category();
+            $category->name = $request->input('category_name');
+            $category->slug = str_slug($category->name);
+            // $category->save();
+            $service->category_id = $category->id;
+        }
+
+        // $service->save();
+
+        return Response::json(array(
+            'code'      =>  404,
+            'message'   =>  $validator
+        ), 404);
+
+        // return Response(['service' => $service]);
     }
 }

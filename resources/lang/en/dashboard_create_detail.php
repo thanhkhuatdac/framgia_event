@@ -7,6 +7,8 @@ return [
     'namePlace' => 'Name',
     'startDate' => 'Start Date',
     'dueDate' => 'Due Date',
+    'amount' => 'Amount: ',
+    'currency' => '$: ',
     'eventServices' => 'Event Services',
     'newService' => 'New Service',
     'save' => 'Save',

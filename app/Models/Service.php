@@ -11,18 +11,13 @@ class Service extends Model
 
     protected $table = 'services';
 
-    public function eventForkDetail()
-    {
-        return $this->belongsTo(EventForkDetail::class);
-    }
-
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function eventPlanDetail()
+    public function forkPlanServices()
     {
-        return $this->belongsTo(EventPlanDetail::class);
+        return $this->hasMany(ForkPlanService::class);
     }
 }
