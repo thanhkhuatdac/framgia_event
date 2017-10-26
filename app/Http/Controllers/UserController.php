@@ -72,8 +72,9 @@ class UserController extends Controller
 
     public function postCreateEventService($id, Request $request)
     {
-        if ($request->ajax()) {
-            // done, xử lý tiếp ở pull sau
+        if (!$request->ajax()) {
+            return view('errors.403');
         }
+        // continue next pull
     }
 }

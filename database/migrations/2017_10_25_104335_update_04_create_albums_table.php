@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Update02ServicesTable extends Migration
+class Update04CreateAlbumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class Update02ServicesTable extends Migration
      */
     public function up()
     {
-        Schema::table('services', function (Blueprint $table) {
-            $table->unsignedInteger('event_fork_detail_id')
-                ->after('event_plan_detail_id');
+        Schema::create('albums', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('image');
+            $table->unsignedInteger('event_plan_id');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,8 +29,6 @@ class Update02ServicesTable extends Migration
      */
     public function down()
     {
-        Schema::table('services', function (Blueprint $table) {
-            $table->dropColumn('event_fork_detail_id');
-        });
+        Schema::dropIfExists('albums');
     }
 }

@@ -31,6 +31,14 @@ class Update01UsersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('phone');
+            $table->dropColumn('address');
+            $table->dropColumn('description');
+            $table->dropColumn('image');
+            $table->dropColumn('score');
+            $table->dropColumn('role');
+            $table->dropSoftDeletes();
+        });
     }
 }

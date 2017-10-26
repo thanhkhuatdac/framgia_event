@@ -26,6 +26,9 @@ class Update03EventForkTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('event_forks', function (Blueprint $table) {
+            $table->dropColumn('start_date');
+            $table->dropColumn('due_date');
+        });
     }
 }

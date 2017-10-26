@@ -5,5 +5,6 @@ return [
         'logo_fav' => 'images/logo-favicon/',
         'user_ava' => 'images/user-avatar/',
         'subject' => 'images/subjects/',
+        'error' => 'images/errors/',
     ],
 ];

@@ -23,6 +23,6 @@ class Update02EventForksTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::rename('event_forks', 'event_fork');
     }
 }

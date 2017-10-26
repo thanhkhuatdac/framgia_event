@@ -116,7 +116,7 @@ $(document).ready(function ($) {
                     var price = $( "#service-price" ).val();
                     var description = $( "#service-description" ).val();
                     $.ajax({
-                        url:'create-service',
+                        url:'post-create-service',
                         type:'POST',
                         async: false,
                         headers: {
