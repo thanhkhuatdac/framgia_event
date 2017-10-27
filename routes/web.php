@@ -31,10 +31,20 @@ Route::group(['prefix' => 'user'], function () {
         Route::group(['prefix' => 'event'], function () {
             Route::get('/', 'UserController@getDashboardEvents')
                 ->name('userDashboardEvents');
+
+            Route::get('load-categories', 'UserController@getLoadCategories')
+                ->name('userDashboardLoadCategories');
+
             Route::get('create-new', 'UserController@getDashboardCreateEvent')
                 ->name('userDashboardCreateNewEvent');
-            Route::get('create-detail', 'UserController@getCreateEventDetail')
+            Route::post('post-create-new', 'UserController@postDashboardCreateEvent')
+                ->name('userDashboardPostCreateNewEvent');
+
+            Route::get('create-detail/{slug}/', 'UserController@getCreateEventDetail')
                 ->name('userDashboardCreateEventDetail');
+            Route::post('post-create-detail', 'UserController@postCreateEventDetail')
+                ->name('userDashboardPostCreateEventDetail');
+
             Route::get('create-service', 'UserController@getCreateEventService')
                 ->name('userDashboardCreateEventService');
             Route::post('post-create-service', 'UserController@postCreateEventService')

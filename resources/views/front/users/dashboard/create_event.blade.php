@@ -16,7 +16,8 @@
                         {{ trans('dashboard_create_event.step1') }}
                     </h4>
                     <p class="mmt-15 mb-20"></p>
-                    <form class="post-form-wrapper">
+                    <form class="post-form-wrapper" action="{{ route('userDashboardPostCreateNewEvent', Auth::user()->id) }}" method="post" enctype="multipart/form-data">
+                        {{ csrf_field() }}
                         <div class="row gap-20">
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
@@ -27,11 +28,13 @@
                                             {{ trans('dashboard_create_event.new') }}
                                         </a>
                                     </label>
-                                    <select id="select-subjects" class="form-control">
+                                    <select id="select-subjects" name="subject" class="form-control">
                                         @foreach($subjects as $subject)
                                             <option value="{{ $subject->id }}">{{ $subject->title }}</option>
                                         @endforeach
                                     </select>
+                                    <input type="hidden" name="new_subject" id="input-new-subject" class="form-control" value=""/>
+
                                     <a href="#remove-subject" id="toggle-remove-subject">
                                         <i id="remove-subject" class="fa fa-trash"></i>
                                     </a>
@@ -48,7 +51,7 @@
                                     <label>
                                         {{ trans('dashboard_create_event.title') }}
                                     </label>
-                                    <input type="text" class="form-control" placeholder="{{ trans('dashboard_create_event.titlePlace') }}">
+                                    <input type="text" name="title" class="form-control" placeholder="{{ trans('dashboard_create_event.titlePlace') }}" required>
                                 </div>
                             </div>
                             <div class="clear"></div>
@@ -57,7 +60,7 @@
                                     <label>
                                         {{ trans('dashboard_create_event.intro') }}
                                     </label>
-                                    <textarea class="form-control" placeholder="{{ trans('dashboard_create_event.introPlace') }}" rows="6"></textarea>
+                                    <textarea name="description" class="form-control" placeholder="{{ trans('dashboard_create_event.introPlace') }}" rows="6" required></textarea>
                                 </div>
                             </div>
                             <div class="clear"></div>
@@ -66,7 +69,7 @@
                                     <label>
                                         {{ trans('dashboard_create_event.image') }}
                                     </label>
-                                    <input type="file" name="form-photos" id="featured-image">
+                                    <input type="file" name="image" id="featured-image" required>
                                     <span class="font12 font-italic">
                                         {{ trans('dashboard_create_event.imageReq') }}
                                     </span>
@@ -78,7 +81,7 @@
                                     <label>
                                         {{ trans('dashboard_create_event.galeryImages') }}
                                     </label>
-                                    <input type="file" name="form-photos" multiple id="form-photos">
+                                    <input type="file" name="albums[]" multiple id="form-photos" required>
                                     <span class="font12 font-italic">
                                         {{ trans('dashboard_create_event.imageReq') }}
                                     </span>
@@ -88,12 +91,12 @@
                             <div class="clear"></div>
                             <div class="clear mb-10"></div>
                             <div class="col-sm-12">
-                                <a href="#" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary">
                                     {{ trans('dashboard_create_event.save') }}
-                                </a>
-                                <a href="#" class="btn btn-primary btn-border">
+                                </button>
+                                <button type="reset" class="btn btn-primary btn-border">
                                     {{ trans('dashboard_create_event.cancel') }}
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </form>

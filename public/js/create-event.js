@@ -1,4 +1,6 @@
 $(document).ready(function ($) {
+    $('#datetimepicker-start-date').datetimepicker();
+    $('#datetimepicker-due-date').datetimepicker();
 
     $( "#toggle-create-subject" ).on("click", function() {
         event.preventDefault();
@@ -8,22 +10,17 @@ $(document).ready(function ($) {
     $( "#btn-add-new-subject" ).on("click", function() {
         event.preventDefault();
         if ($( "#new-subject" ).val() == '') {
-            alert('You have to enter Subject Name');
+            alertify.notify('You have to enter Subject Name', 'error', 7, function() {
+
+            });
             return false;
         }
         var subject = '<option value="new" selected>'+$('#new-subject').val()+'</option>';
-        var flag = 0;
-        $("#select-subjects > option").each(function() {
-            if ($('#new-subject').val() == this.text) {
-                flag = 1;
-            }
-        });
-        if (flag == 1) {
-            alert('Your input Subject already exists!');
-            return false;
-        }
         $( "#select-subjects" ).prepend(subject);
+        $( "#input-new-subject" ).val($('#new-subject').val());
         showBtnRemoveSubject();
+        $( "#toggle-create-subject" ).hide(100);
+        $( "#create-subject" ).hide(100);
     });
 
     function showBtnRemoveSubject () {
@@ -43,13 +40,30 @@ $(document).ready(function ($) {
         if ($( "#select-subjects option:selected" ).val() == "new") {
             $( "#select-subjects option:selected" ).remove();
             showBtnRemoveSubject();
+            $( "#toggle-create-subject" ).show(100);
+            $( "#create-subject" ).show(100);
         }
     });
 
+    function loadCategories () {
+        var userId = $( "#user-id" ).val();
+        $.ajax({
+            url: '/user/dashboard/'+userId+'/event/load-categories',
+            type:'GET',
+            success: function(result)
+            {
+                $( "#select-categories" ).html(result);
+            }
+        });
+    }
+
+    var totalServicePrice = 0;
     $( "#toggle-create-services" ).on("click", function() {
         event.preventDefault();
+        var eventPlanSlug = $( "#input-detail-plan-slug" ).val();
+        var userId = $( "#user-id" ).val();
         $.ajax({
-            url:'create-service',
+            url: '/user/dashboard/'+userId+'/event/create-service',
             type:'GET',
             success: function(result)
             {
@@ -70,16 +84,6 @@ $(document).ready(function ($) {
                         return false;
                     }
                     var category = '<option value="new" selected>'+$('#new-category').val()+'</option>';
-                    var flag = 0;
-                    $("#select-categories > option").each(function() {
-                        if ($('#new-category').val() == this.text) {
-                            flag = 1;
-                        }
-                    });
-                    if (flag == 1) {
-                        alert('Your input Category already exists!');
-                        return false;
-                    }
                     $( "#select-categories" ).prepend(category);
                     showBtnRemoveCategory();
                     $( "#toggle-create-category" ).hide(100);
@@ -116,7 +120,7 @@ $(document).ready(function ($) {
                     var price = $( "#service-price" ).val();
                     var description = $( "#service-description" ).val();
                     $.ajax({
-                        url:'post-create-service',
+                        url:'/user/dashboard/'+userId+'/event/post-create-service',
                         type:'POST',
                         async: false,
                         headers: {
@@ -127,25 +131,37 @@ $(document).ready(function ($) {
                             'name': name, 'price': price,
                             'description': description
                         },
-                        success: function(result)
+                        success: function (result)
                         {
-                            console.log(result);
                             $.each( result, function( key, value ) {
-                                 var liTag = $("<li class='list-group-item'></li>");
-                                 var display = value['name']+': '+value['price'];
-                                 liTag.html(display);
+                                var liTag = $("<li class='list-group-item'></li>");
+                                var display = value['name']+': '+value['price'];
+                                liTag.html(display);
                                 $( "#service-results" ).prepend(liTag);
+                                alertify.notify('Add Service Success', 'success', 7, function() {
+
+                                });
+                                totalServicePrice += parseFloat(value['price']);
                             });
-                            // $( "#detail-amount" ).html('$'+value['price']);
+                            if ($( "#select-categories option:selected" ).val() == "new") {
+                                $( "#select-categories option:selected" ).remove();
+                                showBtnRemoveCategory();
+                                $( "#toggle-create-category" ).show(100);
+                                $( "#create-category" ).hide(100);
+                            }
+                            loadCategories();
                         },
                         error: function (data) {
-                            console.log(data);
-                            var notification = alertify.notify(data.responseJSON.message, 'error', 5, function() {
+                            var errors = data.responseJSON.errors;
+                            $.each( errors, function( key, value ) {
+                                alertify.notify(value[0], 'error', 7, function() {
 
+                                });
                             });
-                            console.log(data);
                         }
                     });
+                    $( "#detail-amount" ).html('$'+totalServicePrice);
+                    $( "#input-detail-amount" ).val(totalServicePrice);
                 });
             }
         });

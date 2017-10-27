@@ -6,5 +6,6 @@ return [
         'user_ava' => 'images/user-avatar/',
         'event_plan' => 'images/event-plan/',
         'error' => 'images/errors/',
+        'album' => 'images/album/',
     ],
 ];
