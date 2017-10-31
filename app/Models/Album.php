@@ -10,6 +10,7 @@ class Album extends Model
     use SoftDeletes;
 
     protected $table = 'albums';
+    protected $guarded = [];
 
     public function eventPlan()
     {

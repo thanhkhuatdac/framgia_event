@@ -10,6 +10,7 @@ class EventPlan extends Model
     use SoftDeletes;
 
     protected $table = 'event_plans';
+    protected $guarded = [];
 
     public function user()
     {

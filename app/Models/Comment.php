@@ -10,6 +10,7 @@ class Comment extends Model
     use SoftDeletes;
 
     protected $table = 'comments';
+    protected $guarded = [];
 
     public function user()
     {

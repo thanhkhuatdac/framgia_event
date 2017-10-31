@@ -10,6 +10,7 @@ class SocialLink extends Model
     use SoftDeletes;
 
     protected $table = 'social_links';
+    protected $guarded = [];
 
     public function user()
     {

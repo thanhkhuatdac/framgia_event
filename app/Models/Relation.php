@@ -10,6 +10,7 @@ class Relation extends Model
     use SoftDeletes;
 
     protected $table = 'relations';
+    protected $guarded = [];
 
     public function user()
     {

@@ -10,6 +10,7 @@ class RequestEvent extends Model
     use SoftDeletes;
 
     protected $table = 'request_events';
+    protected $guarded = [];
 
     public function user()
     {
