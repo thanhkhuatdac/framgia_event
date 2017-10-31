@@ -36,8 +36,18 @@ class EventPlan extends Model
         return $this->hasMany(EventPlanDetail::class);
     }
 
+    public function album()
+    {
+        return $this->hasMany(Album::class);
+    }
+
     public function scopeGetUserEventPlans($query, $id)
     {
         return $query->where('user_id', $id);
+    }
+
+    public function scopeGetEventPlan($query, $slug)
+    {
+        return $query->where('slug', $slug)->first();
     }
 }

@@ -20,6 +20,7 @@
     "jquery-flexdatalist": "https://github.com/sergiodlopes/jquery-flexdatalist.git#^2.2.2",
     "font-awesome": "https://github.com/FortAwesome/Font-Awesome.git#^4.7.0",
     "font-icons-trungquan17": "https://github.com/trungquan17/font-icons.git",
-    "AlertifyJS": "https://github.com/MohammadYounes/AlertifyJS.git#^1.11.0"
+    "AlertifyJS": "https://github.com/MohammadYounes/AlertifyJS.git#^1.11.0",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47"
   }
 }

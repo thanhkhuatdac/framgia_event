@@ -13,4 +13,5 @@ return [
     'newService' => 'New Service',
     'save' => 'Save',
     'cancel' => 'Cancel',
+    'next' => 'Next',
 ];

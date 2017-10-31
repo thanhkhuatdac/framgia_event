@@ -12,7 +12,27 @@
             @include('front.users._sections.dashboard_menu')
             <div class="col-xs-12 col-sm-8 col-md-9 mt-20">
                 <div class="dashboard-wrapper">
-                    <form class="post-form-wrapper">
+                    @if(Session::has('created_event'))
+                        <div class="alert alert-success">
+                            {{session('created_event')}}
+                        </div>
+                    @endif
+                    @if(Session::has('addDetailSuccess'))
+                        <div class="alert alert-success">
+                            {{session('addDetailSuccess')}}
+                        </div>
+                    @endif
+                    @if(Session::has('addDetailError'))
+                        <div class="alert alert-danger">
+                            {{session('addDetailError')}}
+                        </div>
+                    @endif
+                    <form class="post-form-wrapper" action="{{ route('userDashboardPostCreateEventDetail', Auth::user()->id) }}" method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="detail_amount" id="input-detail-amount" class="form-control" value="0"/>
+                        <input type="hidden" name="detail_event_plan_id" id="input-detail-plan-id" class="form-control" value="{{ $eventPlan->id }}"/>
+                        <input type="hidden" name="detail_event_plan_slug" id="input-detail-plan-slug" class="form-control" value="{{ $eventPlan->slug }}"/>
+                        <input type="hidden" name="user_id" id="user-id" class="form-control" value="{{ $user->id }}"/>
                         <div class="row gap-20">
                             <h4 class="section-title">
                                 {{ trans('dashboard_create_detail.step2') }}
@@ -27,7 +47,7 @@
                                 <div class="col-xs-12 col-sm-6 col-md-5">
                                     <div class="form-group">
                                         <label>{{ trans('dashboard_create_detail.name') }}</label>
-                                        <input type="text" class="form-control" value="" placeholder="{{ trans('dashboard_create_detail.namePlace') }}" />
+                                        <input type="text" name="detail_name" class="form-control" value="" placeholder="{{ trans('dashboard_create_detail.namePlace') }}" required />
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-3">
@@ -35,7 +55,7 @@
                                         <label>
                                             {{ trans('dashboard_create_detail.startDate') }}
                                         </label>
-                                        <input type="text" class="form-control" value="" />
+                                        <input type="text" id='datetimepicker-start-date' class="form-control" name="detail_start_date" value="" placeholder="mm/dd/yyyy 0:00 AM" required />
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-3">
@@ -43,7 +63,7 @@
                                         <label>
                                             {{ trans('dashboard_create_detail.dueDate') }}
                                         </label>
-                                        <input type="text" class="form-control" value="" />
+                                        <input type="text" id='datetimepicker-due-date' class="form-control" name="detail_due_date" value="" placeholder="mm/dd/yyyy 0:00 AM" required />
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-7">
@@ -66,7 +86,7 @@
                                 <div id="event-services" class="spaceY10">
                                 </div>
                                 <div class="spaceL20">
-                                    <strong><a href="#" id="toggle-create-services">
+                                    <strong><a href="javascript:void(0)" id="toggle-create-services">
                                         <i class="fa fa-plus"></i>
                                         {{ trans('dashboard_create_detail.newService') }}
                                     </a></strong>
@@ -76,11 +96,14 @@
                             <div class="clear"></div>
                             <div class="clear mb-10"></div>
                             <div class="col-sm-12">
-                                <a href="#" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary">
                                     {{ trans('dashboard_create_detail.save') }}
-                                </a>
-                                <a href="#" class="btn btn-primary btn-border">
+                                </button>
+                                <button type="reset" class="btn btn-primary btn-border">
                                     {{ trans('dashboard_create_detail.cancel') }}
+                                </button>
+                                <a href="#" class="btn btn-primary btn-border">
+                                    {{ trans('dashboard_create_detail.next') }}
                                 </a>
                             </div>
                         </div>
