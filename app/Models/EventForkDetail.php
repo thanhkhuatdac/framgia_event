@@ -10,6 +10,7 @@ class EventForkDetail extends Model
     use SoftDeletes;
 
     protected $table = 'event_fork_details';
+    protected $guarded = [];
 
     public function eventFork()
     {

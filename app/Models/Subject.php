@@ -10,6 +10,7 @@ class Subject extends Model
     use SoftDeletes;
 
     protected $table = 'subjects';
+    protected $guarded = [];
 
     public function eventPlans()
     {

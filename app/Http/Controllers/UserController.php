@@ -88,14 +88,14 @@ class UserController extends Controller
 
         upload_file($image, config('asset.image_path.event_plan'), $imageName);
 
-        $eventPlanId = EventPlan::create([
+        $eventPlan = EventPlan::create([
                 'title' => $request->title,
                 'slug' => str_slug($request->title),
                 'content' => $request->description,
                 'user_id' => $id,
                 'subject_id' => $subjectId,
                 'image' => $imageName,
-        ])->id;
+        ]);
 
         $album = $request->file('albums');
 
@@ -110,7 +110,7 @@ class UserController extends Controller
 
             Album::create([
                     'image' => $itemName,
-                    'event_plan_id' => $eventPlanId,
+                    'event_plan_id' => $eventPlan->id,
             ]);
         }
 

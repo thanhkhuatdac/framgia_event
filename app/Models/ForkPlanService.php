@@ -10,6 +10,7 @@ class ForkPlanService extends Model
     use SoftDeletes;
 
     protected $table = 'fork_plan_services';
+    protected $guarded = [];
 
     public function service()
     {

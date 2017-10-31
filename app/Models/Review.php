@@ -10,6 +10,7 @@ class Review extends Model
     use SoftDeletes;
 
     protected $table = 'reviews';
+    protected $guarded = [];
 
     public function user()
     {
