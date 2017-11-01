@@ -21,4 +21,9 @@ class EventPlanDetail extends Model
     {
         return $this->hasMany(ForkPlanService::class);
     }
+
+    public function scopeGetDetailOfPlan($query, $planId)
+    {
+        return $query->where('event_plan_id', $planId);
+    }
 }

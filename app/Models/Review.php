@@ -24,6 +24,11 @@ class Review extends Model
 
     public function comments()
     {
-        return $this->morphMany(Comment::class);
+        return $this->morphMany('App\Models\Comment', 'commentable');
+    }
+
+    public function scopeGetReviewsOfPlan($query, $eventPlanId)
+    {
+        return $query->where('event_plan_id', $eventPlanId);
     }
 }
