@@ -1,6 +1,8 @@
 @extends('front.main_layouts.master')
 @push('scripts')
+    {{ Html::script('assets/pusher-js/dist/web/pusher.min.js') }}
     {{ Html::script('js/show-event.js') }}
+    {{ Html::script('js/add-review.js') }}
 @endpush
 @section('content')
 
@@ -17,7 +19,7 @@
                     </span>
                     <div class="rating-item rating-item-lg mb-25">
                         <input type="hidden" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o"
-                            data-fractions="2" data-readonly value="4.5" />
+                            data-fractions="2" data-readonly value="{{ $eventPlan->total_rate }}" />
                         <div class="rating-text">
                             <a href="#">({{ $eventPlan->reviews_count }} {{ trans('event_plans_index.reviews') }})</a>
                         </div>
@@ -191,6 +193,7 @@
                         <div class="bb"></div>
                         <div class="mb-25"></div>
                     </div>
+
                     <div id="detail-content-sticky-nav-05">
                         <h2 class="font-lg">
                             {{ trans('event_plans_index.Reviews') }}
@@ -201,14 +204,18 @@
                                     <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-middle">
                                         <div class="GridLex-col-9_sm-8_xs-12_xss-12">
                                             <div class="review-rating">
-                                                <div class="number">{{ $avgRate }}</div>
+                                                <div class="number" id="avg-rate">
+                                                    {{ $eventPlan->total_rate }}
+                                                </div>
                                                 <div class="rating-wrapper">
                                                     <div class="rating-item rating-item-lg">
-                                                        <input type="hidden" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o"
+                                                        <input type="hidden" id="input-avg-rate" class="rating" data-filled="fa fa-star rating-rated" data-empty="fa fa-star-o"
                                                             data-fractions="2" data-readonly
-                                                            value="{{ $avgRate }}" />
+                                                            value="{{ $eventPlan->total_rate }}" />
                                                     </div>
-                                                    {{ $eventPlan->reviews_count }}
+                                                    <span id="count-reviews">
+                                                        {{ $eventPlan->reviews_count }}
+                                                    </span>
                                                     {{ trans('event_plans_index.reviews') }}
                                                 </div>
                                             </div>
@@ -223,6 +230,51 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(!Auth::check())
+                                <p>
+                                    <a data-toggle="modal" href="#loginModal">Đăng Nhập </a> để có thể bình luận cho Sự Kiện này.
+                                </p>
+                            @else
+                                <div id="review-form" class="review-form">
+                                    <h3 class="review-form-title">
+                                        {{ trans('event_plans_index.LeaveYourReview') }}
+                                    </h3>
+                                    <form name="frm-add-comment" method="POST" action="">
+                                        <input type="hidden" name="epId" id="epId" value="{{ $eventPlan->id }}">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                                <div class="form-group">
+                                                    <label>
+                                                        {{ trans('event_plans_index.YourRating') }}
+                                                    </label>
+                                                    <div class="rating-wrapper mt-5">
+                                                        <div class="rating-item">
+                                                            <input type="hidden" name="rate" id="rate" class="rating-label" data-filled="fa fa-star" data-empty="fa fa-star-o"
+                                                                data-fractions="2" value="0"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="col-sm-12 col-md-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                        {{ trans('event_plans_index.YourMessage') }}
+                                                    </label>
+                                                    <textarea class="form-control form-control-sm" name="content" id="content" rows="5"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="clear mb-5"></div>
+                                            <div class="col-sm-12 col-md-8">
+                                                <button type="submit" class="btn btn-primary btn-lg btn-add-review">
+                                                    {{ trans('event_plans_index.Submit') }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            @endif
                             <div class="review-content">
                                 <ul class="review-list">
                                     @foreach($reviews as $review)
@@ -283,44 +335,6 @@
                                 <a href="#" class="review-load-more mb-40">
                                     {{ trans('event_plans_index.LoadMore') }}
                                 </a>
-                            </div>
-                            <div id="review-form" class="review-form">
-                                <h3 class="review-form-title">
-                                    {{ trans('event_plans_index.LeaveYourReview') }}
-                                </h3>
-                                <form class="">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-6 col-md-4">
-                                            <div class="form-group">
-                                                <label>
-                                                    {{ trans('event_plans_index.YourRating') }}
-                                                </label>
-                                                <div class="rating-wrapper mt-5">
-                                                    <div class="rating-item">
-                                                        <input type="hidden" class="rating-label" data-filled="fa fa-star" data-empty="fa fa-star-o"
-                                                            data-fractions="2" value="0"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                        <div class="col-sm-12 col-md-12">
-                                            <div class="form-group">
-                                                <label>
-                                                    {{ trans('event_plans_index.YourMessage') }}
-                                                </label>
-                                                <textarea class="form-control form-control-sm" rows="5"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="clear mb-5"></div>
-                                        <div class="col-sm-12 col-md-8">
-                                            <a href="#" class="btn btn-primary btn-lg">
-                                                {{ trans('event_plans_index.Submit') }}
-                                            </a>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div>

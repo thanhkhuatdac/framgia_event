@@ -50,7 +50,7 @@ if (! function_exists('average')) {
             } else {
                 $average = $total/$quantum;
             }
-            return $average;
+            return round($average, 1);
 
         } catch (Exception $e) {
             Log::error($e);
