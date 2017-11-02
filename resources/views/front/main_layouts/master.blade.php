@@ -12,6 +12,7 @@
     {{ Html::style('assets/font-awesome/css/font-awesome.css') }}
     {{ Html::style('assets/AlertifyJS/build/css/alertify.css') }}
     {{ Html::style('assets/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}
+    {{ Html::style('assets/photoset-grid/css/colorbox.css') }}
     {{ Html::style('css/main.css') }}
     {{ Html::style('css/plugin.css') }}
     {{ Html::style('css/style.css') }}
@@ -47,6 +48,8 @@
     {{ Html::script('assets/moment/min/moment.min.js') }}
     {{ Html::script('assets/bootstrap/dist/js/bootstrap.min.js') }}
     {{ Html::script('assets/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}
+    {{ Html::script('assets/photoset-grid/jquery.photoset-grid.min.js') }}
+    {{ Html::script('assets/photoset-grid/js/jquery.colorbox.js') }}
     {{ Html::script('js/my-custom.js') }}
 
     @stack('scripts')

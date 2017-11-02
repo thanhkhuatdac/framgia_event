@@ -25,6 +25,8 @@ class Update05EventPlansTable extends Migration
      */
     public function down()
     {
-        $table->unsignedInteger('amount');
+        Schema::table('event_plans', function (Blueprint $table) {
+            $table->unsignedInteger('amount');
+        });
     }
 }

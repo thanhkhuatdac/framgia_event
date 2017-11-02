@@ -15,7 +15,7 @@ Auth::routes();
 Route::get('/', 'HomeController@getIndex')->name('home');
 
 Route::group(['prefix' => 'event-plan'], function () {
-    Route::get('/', 'EventPlanController@getIndex')->name('eventPlanIndex');
+    Route::get('/{slug}', 'EventPlanController@getIndex')->name('eventPlanIndex');
 });
 
 Route::group(['prefix' => 'user'], function () {

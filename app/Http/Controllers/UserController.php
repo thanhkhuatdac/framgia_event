@@ -23,7 +23,7 @@ class UserController extends Controller
 {
     public function getProfile($id)
     {
-        $user = User::getUser($id);
+        $user = User::getUser($id)->first();
 
         return view('front.users.details.profile', compact('user'));
     }
@@ -44,14 +44,14 @@ class UserController extends Controller
 
     public function getDashboard($id)
     {
-        $user = User::getUser($id);
+        $user = User::getUser($id)->first();
 
         return view('front.users.dashboard.index', compact('user'));
     }
 
     public function getDashboardEvents($id)
     {
-        $user = User::getUser($id);
+        $user = User::getUser($id)->first();
         $eventPlans = EventPlan::getUserEventPlans($id)
             ->with('subject', 'eventForks')->withCount('eventForks')->get();
 
@@ -61,7 +61,7 @@ class UserController extends Controller
 
     public function getDashboardCreateEvent($id)
     {
-        $user = User::getUser($id);
+        $user = User::getUser($id)->first();
         $subjects = Subject::getAllSubjects();
 
         return view('front.users.dashboard.create_event',
@@ -121,8 +121,8 @@ class UserController extends Controller
 
     public function getCreateEventDetail($id, $slug)
     {
-        $user = User::getUser($id);
-        $eventPlan = EventPlan::getEventPlan($slug);
+        $user = User::getUser($id)->first();
+        $eventPlan = EventPlan::getEventPlan($slug)->first();
         return view('front.users.dashboard.create_event_detail',
             compact('user', 'eventPlan'));
     }
@@ -168,7 +168,7 @@ class UserController extends Controller
 
     public function getCreateEventService($id)
     {
-        $user = User::getUser($id);
+        $user = User::getUser($id)->first();
         $categories = Category::getAllCategories();
         return view('front.users.dashboard._section.services',
             compact('user', 'categories'))->render();

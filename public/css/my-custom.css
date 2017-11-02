@@ -63,3 +63,29 @@
     background: rgba(91, 189, 114, 0.95);
     color: #fff;
 }
+#my-edit {
+    border: none;
+    width: 120px;
+    color: #000;
+}
+#service-price {
+    float: right;
+    font-size: 15px;
+    margin-right: 15px;
+}
+#images-gallery {
+    height: 100%;
+}
+#imgs-grid-image {
+    width: 100%;
+}
+
+ul.review-list li .review-replied {
+    margin-top: -30px;
+}
+.review-date {
+    font-style: italic;
+}
+.related-content {
+    word-wrap: break-word;
+}

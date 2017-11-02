@@ -37,7 +37,7 @@ class EventPlan extends Model
         return $this->hasMany(EventPlanDetail::class);
     }
 
-    public function album()
+    public function albums()
     {
         return $this->hasMany(Album::class);
     }
@@ -49,6 +49,12 @@ class EventPlan extends Model
 
     public function scopeGetEventPlan($query, $slug)
     {
-        return $query->where('slug', $slug)->first();
+        return $query->where('slug', $slug)->where('active', 1);
+    }
+
+    public function scopeRelatedEvents($query, $subjectId, $dismissId)
+    {
+        return $query->where('subject_id', $subjectId)->where('active', 1)
+            ->whereNotIn('id', [$dismissId]);
     }
 }
