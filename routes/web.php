@@ -16,6 +16,8 @@ Route::get('/', 'HomeController@getIndex')->name('home');
 
 Route::group(['prefix' => 'event-plan'], function () {
     Route::get('/{slug}', 'EventPlanController@getIndex')->name('eventPlanIndex');
+    Route::post('add-review/{eventPlanId}', 'EventPlanController@addReview')
+        ->name('addReview');
 });
 
 Route::group(['prefix' => 'user'], function () {

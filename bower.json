@@ -22,6 +22,7 @@
     "font-icons-trungquan17": "https://github.com/trungquan17/font-icons.git",
     "AlertifyJS": "https://github.com/MohammadYounes/AlertifyJS.git#^1.11.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
-    "photoset-grid": "^1.0.1"
+    "photoset-grid": "^1.0.1",
+    "pusher-js": "pusher#^4.2.1"
   }
 }
