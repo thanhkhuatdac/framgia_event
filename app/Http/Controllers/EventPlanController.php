@@ -9,7 +9,10 @@ use App\Models\Review;
 use App\Models\User;
 use App\Models\Comment;
 use App\Events\ReviewEvent;
+use App\Events\ReplyReviewEvent01;
+use App\Events\ReplyReviewEvent02;
 use App\Http\Requests\EventPlanRequest;
+use App\Http\Requests\ReplyReviewRequest;
 use Auth;
 
 class EventPlanController extends Controller
@@ -57,5 +60,28 @@ class EventPlanController extends Controller
         event(new ReviewEvent($reviewView, $avgRate, count($reviews)));
 
         return 'Add Review Successfuly';
+    }
+
+    public function addReplyReview(ReplyReviewRequest $request)
+    {
+        if (!$request->ajax()) {
+            return view('errors.403');
+        }
+        $comment = Comment::create([
+            'user_id' => Auth::user()->id,
+            'commentable_id' => $request->review_id,
+            'commentable_type' => 'reviews',
+            'content' => $request->content,
+        ]);
+
+        $commentView = view('front.event_plans._sections.reply', compact('comment'))->render();
+        if ($request->from_chanel == '01') {
+            event(new ReplyReviewEvent01($commentView, $request->review_id));
+        }
+        if ($request->from_chanel == '02') {
+            event(new ReplyReviewEvent02($commentView, $request->review_id));
+        }
+
+        return 'Add Reply Review Successfuly';
     }
 }

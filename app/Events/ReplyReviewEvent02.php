@@ -10,7 +10,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ReviewEvent implements ShouldBroadcast
+class ReplyReviewEvent02 implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,15 +19,13 @@ class ReviewEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public $review;
-    public $avgRate;
-    public $countReviews;
+    public $reply_review;
+    public $review_id;
 
-    public function __construct($review, $avgRate, $countReviews)
+    public function __construct($reply_review, $review_id)
     {
-        $this->review = $review;
-        $this->avgRate = $avgRate;
-        $this->countReviews = $countReviews;
+        $this->reply_review = $reply_review;
+        $this->review_id = $review_id;
     }
 
     /**
@@ -37,6 +35,6 @@ class ReviewEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('review-chanel');
+        return new Channel('reply-review-chanel-02');
     }
 }

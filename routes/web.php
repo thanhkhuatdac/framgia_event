@@ -18,6 +18,8 @@ Route::group(['prefix' => 'event-plan'], function () {
     Route::get('/{slug}', 'EventPlanController@getIndex')->name('eventPlanIndex');
     Route::post('add-review/{eventPlanId}', 'EventPlanController@addReview')
         ->name('addReview');
+    Route::post('reply-review/{reviewId}', 'EventPlanController@addReplyReview')
+        ->name('addReplyReview');
 });
 
 Route::group(['prefix' => 'user'], function () {

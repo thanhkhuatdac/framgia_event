@@ -89,3 +89,9 @@ ul.review-list li .review-replied {
 .related-content {
     word-wrap: break-word;
 }
+.frm-reply-review form{
+    display: none;
+}
+.rating-item .fa {
+    font-size: 17px;
+}
