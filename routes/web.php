@@ -22,6 +22,10 @@ Route::group(['prefix' => 'event-plan'], function () {
         ->name('addReplyReview');
 });
 
+Route::group(['prefix' => 'request-event'], function () {
+    Route::get('/{slug}', 'RequestEventController@getIndex')->name('requestEventIndex');
+});
+
 Route::group(['prefix' => 'user'], function () {
     Route::get('/{id}', 'UserController@getProfile')->name('userProfile');
     Route::get('redirect/{social}', 'UserController@redirect')
@@ -53,6 +57,13 @@ Route::group(['prefix' => 'user'], function () {
                 ->name('userDashboardCreateEventService');
             Route::post('post-create-service', 'UserController@postCreateEventService')
                 ->name('userDashboardPostCreateEventService');
+
+            Route::get('show-demo/{slug}', 'UserController@showDemoEvent')
+                ->name('showDemoEvent');
+        });
+
+        Route::group(['prefix' => 'request-event'], function () {
+            Route::get('/', 'RequestEventController@showList')->name('listRequestEvent');
         });
     });
 });

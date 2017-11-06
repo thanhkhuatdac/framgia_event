@@ -26,4 +26,14 @@ class RequestEvent extends Model
     {
         return $this->morphMany('App\Models\Comment', 'commentable');
     }
+
+    public function scopeGetUserRequestEvents($query, $user_id)
+    {
+        return $query->where('user_id', $user_id);
+    }
+
+    public function scopeGetRequestEvent($query, $slug)
+    {
+        return $query->where('slug', $slug);
+    }
 }

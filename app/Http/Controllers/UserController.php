@@ -109,8 +109,8 @@ class UserController extends Controller
             upload_file($item, config('asset.image_path.album'), $itemName);
 
             Album::create([
-                    'image' => $itemName,
-                    'event_plan_id' => $eventPlan->id,
+                'image' => $itemName,
+                'event_plan_id' => $eventPlan->id,
             ]);
         }
 
@@ -122,7 +122,8 @@ class UserController extends Controller
     public function getCreateEventDetail($id, $slug)
     {
         $user = User::getUser($id)->first();
-        $eventPlan = EventPlan::getEventPlan($slug)->first();
+        $eventPlan = EventPlan::getEventPlanNoActive($slug)->first();
+
         return view('front.users.dashboard.create_event_detail',
             compact('user', 'eventPlan'));
     }
@@ -145,7 +146,7 @@ class UserController extends Controller
             foreach (Session::get('services') as $serviceId) {
                 ForkPlanService::create([
                     'service_id' => $serviceId,
-                    'plan_id' => $eventPlanDetailId,
+                    'event_plan_detail_id' => $eventPlanDetailId,
                 ]);
             }
 
@@ -181,12 +182,11 @@ class UserController extends Controller
         }
 
         $this->validate($request, [
-                'name' => 'required|unique:services,name',
+                'name' => 'required',
                 'price' => 'required|numeric',
                 'category' => 'required'
             ], [
                 'name.required' => 'Services name required',
-                'name.unique' => 'Service name already exists!',
                 'price.required' => 'Price required',
                 'price.numeric' => 'Price have to number character',
                 'category.required' => 'Category required'
@@ -217,5 +217,17 @@ class UserController extends Controller
         $request->session()->push('services', $service->id);
 
         return Response(['service' => $service]);
+    }
+
+    public function showDemoEvent($id, $slug)
+    {
+        $eventPlan = EventPlan::getEventPlanNoActive($slug)->with('user', 'albums')
+            ->withCount('reviews')->first();
+        $user = User::getUser($eventPlan->user_id)->withCount('reviews', 'eventPlans')
+            ->first();
+        $planDetails = EventPlanDetail::getDetailOfPlan($eventPlan->id)->with('forkPlanServices')->get();
+
+        return view('front.users.dashboard.show_demo_event',
+            compact('user', 'eventPlan', 'planDetails'));
     }
 }

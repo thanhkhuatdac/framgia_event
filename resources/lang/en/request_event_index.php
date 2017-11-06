@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'reviews' => 'reviews',
+    'comments' => 'comments',
     'protect' => '100% Bảo vệ',
     'professional' => '100% Chuyên nghiệp',
     'supportIdea' => 'Hỗ trợ ý tưởng',
@@ -9,15 +9,15 @@ return [
     'Overview' => 'Overview',
     'Gallery' => 'Gallery',
     'Details' => 'Details',
-    'Reviews' => 'Reviews',
-    'OfferedBy' => 'Offered by:',
+    'Comments' => 'Comments',
+    'RequestedBy' => 'Requested by:',
     'ViewProfile' => 'view profile',
     'events' => 'events',
     'scores' => 'scores',
     'WriteReview' => 'Write a review',
     'Reply' => 'Reply',
     'LoadMore' => 'load more...',
-    'LeaveYourReview' => 'Leave Your Review',
+    'LeaveYourComment' => 'Leave Your Comment',
     'YourRating' => 'Your rating: ',
     'YourMessage' => 'Your Message: ',
     'Submit' => 'Submit',
