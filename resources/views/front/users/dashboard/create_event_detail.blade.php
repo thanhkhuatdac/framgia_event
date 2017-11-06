@@ -102,7 +102,7 @@
                                 <button type="reset" class="btn btn-primary btn-border">
                                     {{ trans('dashboard_create_detail.cancel') }}
                                 </button>
-                                <a href="#" class="btn btn-primary btn-border">
+                                <a href="{{ route('showDemoEvent', ['id' => Auth::user()->id, 'slug' => $eventPlan->slug]) }}" class="btn btn-primary btn-border">
                                     {{ trans('dashboard_create_detail.next') }}
                                 </a>
                             </div>

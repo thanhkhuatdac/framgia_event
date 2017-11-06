@@ -52,6 +52,11 @@ class EventPlan extends Model
         return $query->where('slug', $slug)->where('active', 1);
     }
 
+    public function scopeGetEventPlanNoActive($query, $slug)
+    {
+        return $query->where('slug', $slug)->where('active', 0);
+    }
+
     public function scopeRelatedEvents($query, $subjectId, $dismissId)
     {
         return $query->where('subject_id', $subjectId)->where('active', 1)

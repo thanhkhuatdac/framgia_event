@@ -5,5 +5,6 @@ return [
     'editProfile' => 'Edit profile',
     'changePassword' => 'Change password',
     'myEvents' => 'My Events',
+    'myRequestEvents' => 'My Request Events',
     'logout' => 'Logout',
 ];

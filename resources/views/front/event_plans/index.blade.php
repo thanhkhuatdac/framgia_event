@@ -233,7 +233,10 @@
                             </div>
                             @if(!Auth::check())
                                 <p>
-                                    <a data-toggle="modal" href="#loginModal">Đăng Nhập </a> để có thể bình luận cho Sự Kiện này.
+                                    <a data-toggle="modal" href="#loginModal">
+                                        {{ trans('event_plans_index.login') }}
+                                    </a>
+                                    {{ trans('event_plans_index.loginNotif') }}
                                 </p>
                             @else
                                 <div id="review-form" class="review-form">

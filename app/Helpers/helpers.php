@@ -75,3 +75,37 @@ if (! function_exists('limit_characters')) {
         return false;
     }
 }
+
+if (! function_exists('check_freelancer')) {
+
+    function check_freelancer($user)
+    {
+        try {
+            if ($user->role == 'freelancer') {
+                return true;
+            }
+
+        } catch (Exception $e) {
+            Log::error($e);
+        }
+
+        return false;
+    }
+}
+
+if (! function_exists('check_customer')) {
+
+    function check_customer($user)
+    {
+        try {
+            if ($user->role == 'customer') {
+                return true;
+            }
+
+        } catch (Exception $e) {
+            Log::error($e);
+        }
+
+        return false;
+    }
+}

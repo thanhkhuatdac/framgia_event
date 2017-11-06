@@ -11,9 +11,20 @@
                 <li><a href="guide-detail-setting-change-pass.html">
                     {{ trans('dashboard_menu.changePassword') }}
                 </a></li>
-                <li><a href="{{ route('userDashboardEvents', Auth::user()->id) }}">
-                    {{ trans('dashboard_menu.myEvents') }}
-                </a></li>
+                @if(check_freelancer(Auth::user()))
+                    <li>
+                        <a href="{{ route('userDashboardEvents', Auth::user()->id) }}">
+                            {{ trans('dashboard_menu.myEvents') }}
+                        </a>
+                    </li>
+                @endif
+                @if(check_customer(Auth::user()))
+                    <li>
+                        <a href="{{ route('listRequestEvent', Auth::user()->id) }}">
+                            {{ trans('dashboard_menu.myRequestEvents') }}
+                        </a>
+                    </li>
+                @endif
                 <li><a href="#">
                     {{ trans('dashboard_menu.logout') }}
                 </a></li>
