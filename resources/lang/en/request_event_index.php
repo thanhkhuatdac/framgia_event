@@ -29,4 +29,5 @@ return [
         Khi nào admin duyệt, sự kiện của bạn sẽ được hiển thị trên trang chủ.',
     'login' => 'Login',
     'loginNotif' => 'Log in to be able to comment for this event!',
+    'Reviews' => 'Reviews',
 ];

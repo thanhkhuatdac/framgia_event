@@ -390,6 +390,17 @@
                         </a>
                     </div>
                 </aside>
+                <br><hr>
+                @if(check_customer(Auth::user()) && (Auth::user()->id != $eventPlan->user_id))
+                    <aside class="sidebar-wrapper">
+                        <div class="hash-tag-wrapper clearfix mt-10 ml-10 ml-0-sm">
+                            <a href="{{ route('forkEventPlan', ['id' => Auth::user()->id, 'eventPlanId' => $eventPlan->id]) }}"
+                                class="hash-tag" id="btn-forks">
+                                {{ trans('event_plans_index.fork') }}
+                            </a>
+                        </div>
+                    </aside>
+                @endif
             </div>
         </div>
     </div>

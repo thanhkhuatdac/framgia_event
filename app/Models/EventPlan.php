@@ -62,4 +62,9 @@ class EventPlan extends Model
         return $query->where('subject_id', $subjectId)->where('active', 1)
             ->whereNotIn('id', [$dismissId]);
     }
+
+    public function scopeGetEventPlanById($query, $eventPlanId)
+    {
+        return $query->where('id', $eventPlanId)->where('active', 1);
+    }
 }
