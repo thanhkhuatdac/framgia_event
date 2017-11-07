@@ -2,8 +2,7 @@
 @push('scripts')
     {{ Html::script('assets/pusher-js/dist/web/pusher.min.js') }}
     {{ Html::script('js/show-event.js') }}
-    {{ Html::script('js/add-review.js') }}
-    {{ Html::script('js/add-reply-review.js') }}
+    {{ Html::script('js/add-comment.js') }}
 @endpush
 @section('content')
 
@@ -19,22 +18,17 @@
                     </span>
                     <div class="rating-item rating-item-lg mb-25">
                         <div class="rating-text">
-                            <a href="#">({{ $requestEvent->comments_count }}
-                            {{ trans('request_event_index.comments') }})</a>
+                            <a href="javascript:void(0)">
+                                (<span id="comments-count">
+                                    {{ $requestEvent->comments_count }}
+                                </span>
+                                {{ trans('request_event_index.comments') }})
+                            </a>
                         </div>
                     </div>
                     <ul class="list-with-icon list-inline-block">
                         <li><i class="ion-android-done text-primary"></i>
-                            {{ trans('request_event_index.protect') }}
-                        </li>
-                        <li><i class="ion-android-done text-primary"></i>
-                            {{ trans('request_event_index.professional') }}
-                        </li>
-                        <li><i class="ion-android-done text-primary"></i>
-                            {{ trans('request_event_index.supportIdea') }}
-                        </li>
-                        <li><i class="ion-android-done text-primary"></i>
-                            {{ trans('request_event_index.satisfy') }}
+                            {{ $requestEvent->subject->title }}
                         </li>
                     </ul>
                 </div>
@@ -115,7 +109,7 @@
                                         {{ trans('request_event_index.LeaveYourComment') }}
                                     </h3>
                                     <form name="frm-add-comment" method="POST" action="">
-                                        <input type="hidden" name="epId" id="epId" value="{{ $requestEvent->id }}">
+                                        <input type="hidden" name="request_event_id" id="request-event-id" value="{{ $requestEvent->id }}">
                                         <div class="row">
                                             <div class="clear"></div>
                                             <div class="col-sm-12 col-md-12">
@@ -123,12 +117,12 @@
                                                     <label>
                                                         {{ trans('request_event_index.YourMessage') }}
                                                     </label>
-                                                    <textarea class="form-control form-control-sm" name="content" id="content" rows="5"></textarea>
+                                                    <textarea class="form-control form-control-sm" name="comment_content" id="comment-content" rows="5"></textarea>
                                                 </div>
                                             </div>
                                             <div class="clear mb-5"></div>
                                             <div class="col-sm-12 col-md-8">
-                                                <button type="submit" class="btn btn-primary btn-lg btn-add-review">
+                                                <button type="submit" class="btn btn-primary btn-lg btn-add-comment">
                                                     {{ trans('request_event_index.Submit') }}
                                                 </button>
                                             </div>
@@ -137,7 +131,7 @@
                                 </div>
                             @endif
                             <div class="review-content">
-                                <ul class="review-list">
+                                <ul class="review-list" id="list-comment">
                                     @foreach($requestEvent->comments as $comment)
                                         <li class="clearfix">
                                             <div class="row">
@@ -149,11 +143,6 @@
                                                         <span class="review-date">
                                                             ({{ $comment->created_at->format('H:i, d/m/Y') }})
                                                         </span>
-                                                        <div class="link-reply">
-                                                            <a href="#" class="btn btn-primary" id="{{ $comment->id }}">
-                                                                {{ trans('request_event_index.Reply') }}
-                                                            </a>
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-8 col-md-9">
@@ -161,7 +150,6 @@
                                                         <p>
                                                             {{ $comment->content }}
                                                         </p>
-                                                        <hr>
                                                     </div>
                                                     <hr>
                                                 </div>
@@ -184,6 +172,7 @@
                             {{ trans('request_event_index.#') }}
                             {{ $requestEvent->subject->title }}
                         </a>
+                        <br><br>
                         <a href="#" class="hash-tag">
                             {{ trans('request_event_index.#') }}
                             {{ trans('request_event_index.professional') }}

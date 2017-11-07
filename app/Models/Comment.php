@@ -21,4 +21,10 @@ class Comment extends Model
     {
         return $this->morphTo();
     }
+
+    public function scopeGetCommentsByRequestEvent($query, $request_event_id)
+    {
+        return $query->where('commentable_type', 'request_events')
+            ->where('commentable_id', $request_event_id);
+    }
 }

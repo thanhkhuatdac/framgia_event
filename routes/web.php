@@ -24,6 +24,8 @@ Route::group(['prefix' => 'event-plan'], function () {
 
 Route::group(['prefix' => 'request-event'], function () {
     Route::get('/{slug}', 'RequestEventController@getIndex')->name('requestEventIndex');
+    Route::post('add-comment/{requestEventId}', 'RequestEventController@addComment')
+        ->name('addComment');
 });
 
 Route::group(['prefix' => 'user'], function () {
