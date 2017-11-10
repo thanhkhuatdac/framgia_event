@@ -68,4 +68,15 @@ Route::group(['prefix' => 'user'], function () {
             Route::get('/', 'RequestEventController@showList')->name('listRequestEvent');
         });
     });
+
+    Route::group(['prefix' => '{id}/fork'], function () {
+        Route::get('/{eventPlanId}', 'EventForkController@forkEventPlan')
+            ->name('forkEventPlan');
+        Route::post('click-element', 'EventForkController@clickElement')
+            ->name('forkClickElement');
+        Route::post('loses-element', 'EventForkController@losesElement')
+            ->name('forkLosesElement');
+        Route::post('changed-data', 'EventForkController@changedData')
+            ->name('forkChangedData');
+    });
 });

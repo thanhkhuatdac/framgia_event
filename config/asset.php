@@ -8,4 +8,8 @@ return [
         'error' => 'images/errors/',
         'album' => 'images/album/',
     ],
+    'active' => [
+        'yes' => 1,
+        'no' => 0,
+    ],
 ];

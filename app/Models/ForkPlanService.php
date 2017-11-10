@@ -26,4 +26,9 @@ class ForkPlanService extends Model
     {
         return $this->belongsTo(EventForkDetail::class);
     }
+
+    public function scopeFindByEventPlanDetail($query, $eventPlanDetailId)
+    {
+        return $query->where('event_plan_detail_id', $eventPlanDetailId);
+    }
 }
