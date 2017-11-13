@@ -18,7 +18,8 @@ $(document).ready(function ($) {
         });
     });
 
-    var pusher = new Pusher('6c0ea64bcf039f7c4c14', {
+    var pusherKey = $('#sidebar-sticky').data('pusher-key');
+    var pusher = new Pusher(pusherKey, {
         cluster: 'ap1',
         encrypted: true
     });
@@ -133,6 +134,7 @@ function changedData (id) {
     event.preventDefault();
     var url = $('#' + id).data('url-changed');
     var elementValue = $('#' + id).val();
+    var target = $('#' + id).data('target');
     $.ajax({
         url: url,
         type: 'post',
@@ -142,7 +144,8 @@ function changedData (id) {
         },
         data: {
             'elementId': id,
-            'elementValue': elementValue
+            'elementValue': elementValue,
+            'target': target
         },
         success: function (result) {
             return true;

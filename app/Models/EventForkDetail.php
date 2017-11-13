@@ -21,4 +21,14 @@ class EventForkDetail extends Model
     {
         return $this->hasMany(ForkPlanService::class);
     }
+
+    public function scopeGetById($query, $id)
+    {
+        return $query->where('id', $id);
+    }
+
+    public function scopeGetDetailOfFork($query, $forkId)
+    {
+        return $query->where('event_fork_id', $forkId);
+    }
 }

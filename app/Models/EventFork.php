@@ -26,4 +26,9 @@ class EventFork extends Model
     {
         return $this->hasMany(EventForkDetail::class);
     }
+
+    public function scopeGetById($query, $id)
+    {
+        return $query->where('id', $id);
+    }
 }
