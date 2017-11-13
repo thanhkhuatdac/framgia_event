@@ -69,7 +69,8 @@
                                 data-url-click="{{ route('forkClickElement', Auth::user()->id) }}"
                                 data-url-loses="{{ route('forkLosesElement', Auth::user()->id) }}"
                                 data-url-changed="{{ route('forkChangedData', Auth::user()->id) }}"
-                                name="event_fork_start_date" value=""
+                                name="event_fork_start_date"
+                                value="{{ date('m/d/Y', strtotime($eventFork->start_date)) }}"
                                 placeholder="{{ trans('event_forks_show.dateTimePlace') }}"
                                 required />
                         </div>
@@ -83,7 +84,8 @@
                                 data-url-click="{{ route('forkClickElement', Auth::user()->id) }}"
                                 data-url-loses="{{ route('forkLosesElement', Auth::user()->id) }}"
                                 data-url-changed="{{ route('forkChangedData', Auth::user()->id) }}"
-                                name="event_fork_due_date" value=""
+                                name="event_fork_due_date"
+                                value="{{ date('m/d/Y', strtotime($eventFork->due_date)) }}"
                                 placeholder="{{ trans('event_forks_show.dateTimePlace') }}"
                                 required />
                         </div>
@@ -127,7 +129,9 @@
                                             data-url-loses="{{ route('forkLosesElement', Auth::user()->id) }}"
                                             data-url-changed="{{ route('forkChangedData', Auth::user()->id) }}"
                                             class="form-control fork-detail-start-date"
-                                            name="fork_detail_start_date" value="" placeholder="{{ trans('event_forks_show.dateTimePlace') }}" required />
+                                            name="fork_detail_start_date"
+                                            value="{{ date('m/d/Y', strtotime($forkDetail->start_date)) }}"
+                                            placeholder="{{ trans('event_forks_show.dateTimePlace') }}" required />
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-3">
@@ -140,7 +144,9 @@
                                             data-url-loses="{{ route('forkLosesElement', Auth::user()->id) }}"
                                             data-url-changed="{{ route('forkChangedData', Auth::user()->id) }}"
                                             class="form-control fork-detail-due-date"
-                                            name="fork_detail_due_date" value="" placeholder="{{ trans('event_forks_show.dateTimePlace') }}" required />
+                                            name="fork_detail_due_date"
+                                            value="{{ date('m/d/Y', strtotime($forkDetail->due_date)) }}"
+                                            placeholder="{{ trans('event_forks_show.dateTimePlace') }}" required />
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-2">
@@ -189,7 +195,10 @@
                 </form>
             </div>
 
-            <div id="sidebar-sticky" class="col-xs-12 col-sm-12 col-md-4">
+            <div id="sidebar-sticky" data-pusher-key="{{ env('PUSHER_APP_KEY') }}"
+                class="col-xs-12 col-sm-12 col-md-4">
+                <input type="hidden" id="freelancer" value="{{ $eventFork->eventPlan->user_id }}">
+                <input type="hidden" id="customer" value="{{ $eventFork->user->id }}">
                 <aside class="sidebar-wrapper">
                     <div class="hash-tag-wrapper clearfix mt-10 ml-10 ml-0-sm">
                         <div class="title-chat">
@@ -198,18 +207,15 @@
                             </h4>
                         </div>
                         <div class="content-chat">
-                            <div class="you">
-                                <span class="message-you"></span>
-                            </div>
-                            <div class="me">
-                                <span class="message-me"></span>
-                            </div>
+                            <ul id="show-messages" class="list-group">
+                            </ul>
                         </div>
                         <div class="clear"></div>
                         <div class="input-chat">
-                            <textarea class="form-control" name="input_chat"
-                                placeholder="{{ trans('event_forks_show.inputChatPlace') }}">
-                            </textarea>
+                            <textarea class="form-control" name="input_chat" id="input-chat"
+                                data-send-message="{{ route('forkLiveChat', Auth::user()->id) }}"
+                                data-user-id="{{ Auth::user()->id }}"
+                                placeholder="{{ trans('event_forks_show.inputChatPlace') }}"></textarea>
                         </div>
                     </div>
                 </aside>

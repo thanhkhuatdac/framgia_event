@@ -78,5 +78,7 @@ Route::group(['prefix' => 'user'], function () {
             ->name('forkLosesElement');
         Route::post('changed-data', 'EventForkController@changedData')
             ->name('forkChangedData');
+        Route::post('chat', 'EventForkController@liveChat')
+            ->name('forkLiveChat');
     });
 });

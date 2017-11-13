@@ -10,6 +10,8 @@ use App\Models\ForkPlanService;
 use App\Events\ForkClickElementEvent;
 use App\Events\ForkLosesElementEvent;
 use App\Events\ForkChangedDataEvent;
+use App\Events\ForkLiveChatEvent;
+use DB;
 
 class EventForkController extends Controller
 {
@@ -30,9 +32,9 @@ class EventForkController extends Controller
                 }
             }
         }
-        DB::transaction(function()
+        $eventFork = DB::transaction(function () use ($eventPlan, $userId)
         {
-            $eventFork = EventFork::create([
+            $newEventFork = EventFork::create([
                 'slug' => $eventPlan->slug,
                 'amount' => $eventPlan->amount,
                 'event_plan_id' => $eventPlan->id,
@@ -45,15 +47,19 @@ class EventForkController extends Controller
                     'due_date' => $detail->due_date,
                     'amount' => $detail->amount,
                     'status' => config('asset.active.yes'),
-                    'event_fork_id' => $eventFork->id,
+                    'event_fork_id' => $newEventFork->id,
                 ]);
 
                 $forkPlanServices = ForkPlanService::findByEventPlanDetail($detail->id)->get();
                 foreach ($forkPlanServices as $forkService) {
-                    $forkService->event_fork_detail_id = $eventForkDetail->id;
-                    $forkService->save();
+                    ForkPlanService::create([
+                        'service_id' => $forkService->service_id,
+                        'event_fork_detail_id' => $eventForkDetail->id,
+                    ]);
                 }
             }
+
+            return $newEventFork;
         });
 
         return view('front.event_forks.show', compact('eventFork'));
@@ -85,5 +91,17 @@ class EventForkController extends Controller
         $elementId = $request->elementId;
         $elementValue = $request->elementValue;
         event(new ForkChangedDataEvent($elementId, $elementValue));
+    }
+
+    public function liveChat(Request $request)
+    {
+        if (!$request->ajax()) {
+            return view('errors.403');
+        }
+        $user = $request->user;
+        $content = $request->content;
+        $chanelId = $request->chanelId;
+
+        event(new ForkLiveChatEvent($user, $content, $chanelId));
     }
 }
