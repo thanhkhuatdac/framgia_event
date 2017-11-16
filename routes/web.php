@@ -70,6 +70,8 @@ Route::group(['prefix' => 'user'], function () {
     });
 
     Route::group(['prefix' => '{id}/fork'], function () {
+        Route::get('show/{eventForkId}', 'EventForkController@showEventFork')->name('showEventFork');
+
         Route::get('/{eventPlanId}', 'EventForkController@forkEventPlan')
             ->name('forkEventPlan');
         Route::post('click-element', 'EventForkController@clickElement')
@@ -80,5 +82,15 @@ Route::group(['prefix' => 'user'], function () {
             ->name('forkChangedData');
         Route::post('chat', 'EventForkController@liveChat')
             ->name('forkLiveChat');
+
+        Route::post('remove-service/{forkServiceId}', 'EventForkController@removeForkService')
+            ->name('removeForkService');
+        Route::post('load-fork-detail-amount/{forkDetailId}', 'EventForkController@loadForkDetailAmount')
+            ->name('loadForkDetailAmount');
+        Route::post('load-event-fork-amount/{eventForkId}', 'EventForkController@loadEventForkAmount')
+            ->name('loadEventForkAmount');
+
+        Route::post('add-fork-service', 'EventForkController@addForkService')
+            ->name('addForkService');
     });
 });

@@ -31,4 +31,9 @@ class ForkPlanService extends Model
     {
         return $query->where('event_plan_detail_id', $eventPlanDetailId);
     }
+
+    public function scopeGetById($query, $id)
+    {
+        return $query->where('id', $id);
+    }
 }
