@@ -36,4 +36,9 @@ class RequestEvent extends Model
     {
         return $query->where('slug', $slug);
     }
+
+    public function scopeGetAllRequestEvents($query)
+    {
+        return $query->orderBy('id', 'DESC');
+    }
 }

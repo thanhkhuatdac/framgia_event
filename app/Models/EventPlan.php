@@ -67,4 +67,14 @@ class EventPlan extends Model
     {
         return $query->where('id', $eventPlanId)->where('active', 1);
     }
+
+    public function scopeGetEventPlanBySubject($query, $subjectId)
+    {
+        return $query->where('subject_id', $subjectId)->where('active', 1)->orderBy('id', 'DESC');
+    }
+
+    public function scopeGetAll($query)
+    {
+        return $query->where('active', 1)->orderBy('id', 'ASC');
+    }
 }
