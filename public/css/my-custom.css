@@ -195,3 +195,16 @@ ul.review-list li .review-replied {
 .img-bg-01 {
     background-image: url('../images/event-plan/default-bg-title.jpg');
 }
+.sidebar-booking-inner .user-long-sm-item .image {
+    width: 50px;
+    border: 2px solid #ECF0F1;
+    border-radius: 50%;
+    background: #FFF;
+    padding: 2px;
+    float: left;
+}
+.sidebar-booking-inner .user-long-sm-item .content {
+    margin-left: 70px;
+    line-height: 1.25;
+    padding-top: 5px;
+}

@@ -32,6 +32,12 @@ Route::group(['prefix' => 'request-event'], function () {
 
 Route::group(['prefix' => 'user'], function () {
     Route::get('/{id}', 'UserController@getProfile')->name('userProfile');
+
+    Route::get('/{id}/request-events', 'UserController@getAllRequestEvents')
+        ->name('userRequestEvents');
+    Route::get('/{id}/event-plans', 'UserController@getAllEventPlans')
+        ->name('userEventPlans');
+
     Route::get('redirect/{social}', 'UserController@redirect')
         ->name('socialRedirect');
     Route::get('callback/{social}', 'UserController@callback')
@@ -39,6 +45,10 @@ Route::group(['prefix' => 'user'], function () {
 
     Route::group(['prefix' => 'dashboard/{id}', 'middleware' => 'AuthUser'], function () {
         Route::get('/', 'UserController@getDashboard')->name('userDashboard');
+        Route::get('edit-profile', 'UserController@getEditProfile')->name('getEditProfile');
+        Route::post('edit-profile', 'UserController@postEditProfile')->name('postEditProfile');
+        Route::get('change-password', 'UserController@getChangePassword')->name('getChangePassword');
+        Route::post('change-password', 'UserController@postChangePassword')->name('postChangePassword');
 
         Route::group(['prefix' => 'event'], function () {
             Route::get('/', 'UserController@getDashboardEvents')
@@ -68,6 +78,19 @@ Route::group(['prefix' => 'user'], function () {
 
         Route::group(['prefix' => 'request-event'], function () {
             Route::get('/', 'RequestEventController@showList')->name('listRequestEvent');
+
+            Route::get('create-new', 'RequestEventController@getCreate')
+                ->name('getCreateRequestEvent');
+            Route::post('post-create-new', 'RequestEventController@postCreate')
+                ->name('postCreateRequestEvent');
+            Route::get('remove/{requestEventId}', 'RequestEventController@getRemove')
+                ->name('getRemoveRequestEvent');
+        });
+
+        Route::group(['prefix' => 'event-fork'], function () {
+            Route::get('/', 'EventForkController@showList')->name('listForkEvent');
+            Route::get('remove/{eventForkId}', 'EventForkController@getRemove')
+                ->name('getRemoveEventFork');
         });
     });
 

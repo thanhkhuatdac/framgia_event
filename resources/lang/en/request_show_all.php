@@ -4,6 +4,7 @@ return [
     'title01' => 'Tổng Hợp Yêu  Cầu Sự Kiện',
     'title02' => 'Request Events',
     'requestDate' => 'Request date:',
+    'createdDate' => 'Created Date:',
     'view' => 'View',
     'tags' => 'Tags',
     'wedding' => 'Wedding',

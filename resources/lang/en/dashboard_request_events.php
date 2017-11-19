@@ -2,6 +2,7 @@
 
 return [
     'title' => 'My Request Events',
+    'titleFork' => 'My Fork Events',
     'comments' => 'Comments',
     'view' => 'View',
     'delete' => 'Delete',

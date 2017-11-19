@@ -6,26 +6,156 @@ use Illuminate\Http\Request;
 use App\Services\SocialAccountService;
 use App\Models\User;
 use App\Models\EventPlan;
+use App\Models\RequestEvent;
 use App\Models\EventPlanDetail;
 use App\Models\ForkPlanService;
+use App\Models\SocialLink;
 use App\Models\Subject;
 use App\Models\Category;
 use App\Models\Service;
 use App\Models\Album;
+use App\Http\Requests\EditProfileRequest;
+use App\Http\Requests\ChangePasswordRequest;
 use Socialite;
 use Auth;
 use Response;
 use Validator;
 use Session;
 use Carbon;
+use Hash;
 
 class UserController extends Controller
 {
     public function getProfile($id)
     {
-        $user = User::getUser($id)->first();
+        $user = User::getUser($id)->withCount('requestEvents', 'eventPlans', 'comments', 'eventForks')
+            ->with('socialLinks')->first();
+        $topUsers = User::getTopFreelancers()->take(10)->get();
 
-        return view('front.users.details.profile', compact('user'));
+        return view('front.users.details.profile', compact('user', 'topUsers'));
+    }
+
+    public function getAllRequestEvents($userId)
+    {
+        $user = User::getUser($userId)->first();
+        $topUsers = User::getTopFreelancers()->take(10)->get();
+        $requestEvents = RequestEvent::getUserRequestEvents($userId)->paginate(7);
+
+        return view('front.users.details.request_events', compact('user', 'topUsers', 'requestEvents'));
+    }
+
+    public function getAllEventPlans($userId)
+    {
+        $user = User::getUser($userId)->first();
+        $topUsers = User::getTopFreelancers()->take(10)->get();
+        $eventPlans = EventPlan::getUserEventPlans($userId)->paginate(7);
+
+        return view('front.users.details.event_plans', compact('user', 'topUsers', 'eventPlans'));
+    }
+
+    public function getEditProfile($userId)
+    {
+        $user = User::getUser($userId)->first();
+        $socialLinks = SocialLink::getByUser($userId)->get();
+
+        $facebook = '';
+        $instagram = '';
+        $twitter = '';
+        foreach ($socialLinks as $item) {
+            if ($item->name == 'facebook') {
+                $facebook = $item->link;
+            }
+            if ($item->name == 'instagram') {
+                $instagram = $item->link;
+            }
+            if ($item->name == 'twitter') {
+                $twitter = $item->link;
+            }
+        }
+
+        return view('front.users.dashboard.profiles.edit',
+            compact('user', 'facebook', 'instagram', 'twitter'));
+    }
+    public function postEditProfile($userId, EditProfileRequest $request)
+    {
+        $user = User::getUser($userId)->first();
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $imageName = str_random(4).'_'.$image->getClientOriginalName();
+
+            while (file_exists(config('asset.image_path.user_ava').$imageName)) {
+                $imageName = str_random(4).'_'.$image->getClientOriginalName();
+            }
+
+            upload_file($image, config('asset.image_path.user_ava'), $imageName);
+            $user->image = $imageName;
+        }
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->description = $request->description;
+        $user->save();
+
+        $facebook = SocialLink::getLink($userId, 'facebook')->first();
+        if (!$facebook) {
+            SocialLink::create([
+                'user_id' => $userId,
+                'name' => 'facebook',
+                'link' => $request->facebook,
+            ]);
+        } else {
+            $facebook->link = $request->facebook;
+            $facebook->save();
+        }
+
+        $instagram = SocialLink::getLink($userId, 'instagram')->first();
+        if (!$instagram) {
+            SocialLink::create([
+                'user_id' => $userId,
+                'name' => 'instagram',
+                'link' => $request->instagram,
+            ]);
+        } else {
+            $instagram->link = $request->instagram;
+            $instagram->save();
+        }
+
+        $twitter = SocialLink::getLink($userId, 'twitter')->first();
+        if (!$twitter) {
+            SocialLink::create([
+                'user_id' => $userId,
+                'name' => 'twitter',
+                'link' => $request->twitter,
+            ]);
+        } else {
+            $twitter->link = $request->twitter;
+            $twitter->save();
+        }
+
+        return redirect()->back()->with('updated', 'Update user successfuly!');
+    }
+
+    public function getChangePassword($userId)
+    {
+        $user = User::getUser($userId)->first();
+
+        return view('front.users.dashboard.profiles.change_password', compact('user'));
+    }
+
+    public function postChangePassword($userId, ChangePasswordRequest $request)
+    {
+        $user = User::getUser($userId)->first();
+        if (!Hash::check($request->currentPassword, $user->password)) {
+            return redirect()->back()->withErrors('The current password not exactly!');
+        }
+
+        $user->fill(['password' => Hash::make($request->newPassword)])->save();
+
+        Auth::logout();
+        Session::flush();
+
+        return redirect()->route('home')
+            ->with('updatedPass', 'Update Password successfuly, please Login again!');
     }
 
     public function redirect($social)

@@ -23,6 +23,8 @@
     "AlertifyJS": "https://github.com/MohammadYounes/AlertifyJS.git#^1.11.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "photoset-grid": "^1.0.1",
-    "pusher-js": "pusher#^4.2.1"
+    "pusher-js": "pusher#^4.2.1",
+    "bootstrap-fileinput": "https://github.com/kartik-v/bootstrap-fileinput.git#^4.4.6",
+    "bootstrap3-wysihtml5-bower": "https://github.com/Waxolunist/bootstrap3-wysihtml5-bower.git#^0.3.3"
   }
 }

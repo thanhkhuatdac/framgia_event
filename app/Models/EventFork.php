@@ -31,4 +31,9 @@ class EventFork extends Model
     {
         return $query->where('id', $id);
     }
+
+    public function scopeGetUserEventForks($query, $userId)
+    {
+        return $query->where('user_id', $userId);
+    }
 }

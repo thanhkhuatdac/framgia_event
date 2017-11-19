@@ -6,5 +6,6 @@ return [
     'changePassword' => 'Change password',
     'myEvents' => 'My Events',
     'myRequestEvents' => 'My Request Events',
+    'myForkEvents' => 'My Fork Events',
     'logout' => 'Logout',
 ];

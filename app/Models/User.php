@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use DB;
 
 class User extends Authenticatable
 {
@@ -82,5 +83,11 @@ class User extends Authenticatable
     public function scopeGetAllCustomers($query)
     {
         return $query->where('role', 'customer');
+    }
+
+    public function scopeGetTopFreelancers($query)
+    {
+        return $query->where('role', 'freelancer')->select('score', DB::raw('MAX(score) as max'))
+            ->groupBy('score')->OrderByDESC('score');
     }
 }

@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
 use App\Events\CommentEvent;
 use App\Models\RequestEvent;
+use App\Models\Subject;
 use App\Models\Comment;
 use App\Models\User;
+use App\Http\Requests\CreateRequestEvent;
 use Auth;
 
 class RequestEventController extends Controller
@@ -15,7 +17,7 @@ class RequestEventController extends Controller
     public function showList($user_id)
     {
         $user = User::getUser($user_id)->first();
-        $requestEvents = RequestEvent::getUserRequestEvents($user_id)->withCount('comments')->get();
+        $requestEvents = RequestEvent::getUserRequestEvents($user_id)->withCount('comments')->paginate(5);
 
         return view('front.users.dashboard.request_events.request_events',
             compact('requestEvents', 'user'));
@@ -54,5 +56,37 @@ class RequestEventController extends Controller
         $requestEvents = RequestEvent::getAllRequestEvents()->paginate(7);
 
         return view('front.request_events.show_all', compact('requestEvents'));
+    }
+
+    public function getCreate($userId)
+    {
+        $user = User::getUser($userId)->first();
+        $subjects = Subject::getAllSubjects();
+
+        return view('front.users.dashboard.request_events.create_new', compact('subjects', 'user'));
+    }
+
+    public function postCreate($userId, CreateRequestEvent $request)
+    {
+        $requestEvent = RequestEvent::create([
+            'title' => $request->title,
+            'slug' => str_slug($request->title),
+            'content' => $request->description,
+            'user_id' => Auth::user()->id,
+            'subject_id' => $request->subject,
+        ]);
+
+        return redirect()->route('requestEventIndex', [$requestEvent->id, $requestEvent->slug]);
+    }
+
+    public function getRemove($userId, $requestEventId)
+    {
+        $requestEvent = RequestEvent::find($requestEventId);
+        if (!$requestEvent) {
+            return view('errors.403');
+        }
+        $requestEvent->delete();
+
+        return redirect()->back()->with('removed', 'Remove Event Successfuly');
     }
 }
