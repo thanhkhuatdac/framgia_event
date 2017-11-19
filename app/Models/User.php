@@ -73,4 +73,14 @@ class User extends Authenticatable
     {
         return $query->where('id', $id);
     }
+
+    public function scopeGetAllFreelancers($query)
+    {
+        return $query->where('role', 'freelancer');
+    }
+
+    public function scopeGetAllCustomers($query)
+    {
+        return $query->where('role', 'customer');
+    }
 }

@@ -26,4 +26,9 @@ class Subject extends Model
     {
         return $query->get();
     }
+
+    public function scopeGetSubjectBySlug($query, $slug)
+    {
+        return $query->where('slug', $slug);
+    }
 }

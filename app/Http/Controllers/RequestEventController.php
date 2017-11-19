@@ -21,7 +21,7 @@ class RequestEventController extends Controller
             compact('requestEvents', 'user'));
     }
 
-    public function getIndex($slug)
+    public function getIndex($id, $slug)
     {
         $requestEvent = RequestEvent::getRequestEvent($slug)
             ->with('comments', 'user', 'subject')->withCount('comments')->first();
@@ -47,5 +47,12 @@ class RequestEventController extends Controller
         event(new CommentEvent($commentView, $commentsCount));
 
         return 'Add Comment Successfuly';
+    }
+
+    public function showAll()
+    {
+        $requestEvents = RequestEvent::getAllRequestEvents()->paginate(7);
+
+        return view('front.request_events.show_all', compact('requestEvents'));
     }
 }

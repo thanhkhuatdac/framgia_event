@@ -34,7 +34,7 @@
                                             </div>
                                             <div class="GridLex-col-4_sm-8_xs-8_xss-8">
                                                 <div class="GridLex-inner text-right">
-                                                    <a href="{{ route('requestEventIndex', $requestEvent->slug) }}" class="btn btn-primary btn-sm">{{ trans('dashboard_request_events.view') }}</a>
+                                                    <a href="{{ route('requestEventIndex', [$requestEvent->id ,$requestEvent->slug]) }}" class="btn btn-primary btn-sm">{{ trans('dashboard_request_events.view') }}</a>
                                                     <a href="#" class="btn btn-danger btn-sm">{{ trans('dashboard_request_events.delete') }}</a>
                                                 </div>
                                             </div>

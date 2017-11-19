@@ -3,7 +3,7 @@
         <div class="container">
             <div class="logo-wrapper">
                 <div class="logo">
-                    <a href="#">
+                    <a href="{{ route('home') }}">
                         {{ HTML::image(config('asset.image_path.logo_fav') . '/logo-trungquandev.png', 'Logo', ['class' => 'thumb']) }}
                     </a>
                 </div>
@@ -18,20 +18,19 @@
                         {{ trans('header_menu.offeredEvent') }}
                         </a>
                         <ul>
-                            <li>
-                                <a href="#">
-                                {{ trans('header_menu.wedding') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                {{ trans('header_menu.birthday') }}
-                                </a>
-                            </li>
+                            @foreach($subjects as $subject)
+                                <li>
+                                    <a href="{{ route('allEventPlans', $subject->slug) }}">
+                                    {{ $subject->title }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
                     <li>
-                        <a href="#">{{ trans('header_menu.requestedEvent') }}</a>
+                        <a href="{{ route('allRequestEvent') }}">
+                            {{ trans('header_menu.requestedEvent') }}
+                        </a>
                     </li>
                 </ul>
             </div>

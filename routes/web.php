@@ -13,6 +13,8 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@getIndex')->name('home');
+Route::get('subjects/{slug}', 'SubjectController@index')->name('allEventPlans');
+Route::get('requested-events', 'RequestEventController@showAll')->name('allRequestEvent');
 
 Route::group(['prefix' => 'event-plan'], function () {
     Route::get('/{slug}', 'EventPlanController@getIndex')->name('eventPlanIndex');
@@ -23,7 +25,7 @@ Route::group(['prefix' => 'event-plan'], function () {
 });
 
 Route::group(['prefix' => 'request-event'], function () {
-    Route::get('/{slug}', 'RequestEventController@getIndex')->name('requestEventIndex');
+    Route::get('/{id}/{slug}', 'RequestEventController@getIndex')->name('requestEventIndex');
     Route::post('add-comment/{requestEventId}', 'RequestEventController@addComment')
         ->name('addComment');
 });
