@@ -337,7 +337,8 @@
                         <h2 class="alt-font-size">
                             {{ trans('home_pages.createYourEventPlan') }}
                         </h2>
-                        <a data-toggle="modal" href="#registerModal" class="btn btn-primary btn-lg">
+                        <a data-toggle="modal" class="btn btn-primary btn-lg"
+                            href="{{ route('userDashboardCreateNewEvent', Auth::user()->id) }}">
                             {{ trans('home_pages.create') }}
                         </a>
                     @endif
@@ -345,7 +346,8 @@
                         <h2 class="alt-font-size">
                             {{ trans('home_pages.createYourRequestEvent') }}
                         </h2>
-                        <a data-toggle="modal" href="#registerModal" class="btn btn-primary btn-lg">
+                        <a data-toggle="modal" class="btn btn-primary btn-lg"
+                            href="{{ route('getCreateRequestEvent', Auth::user()->id) }}">
                             {{ trans('home_pages.create') }}
                         </a>
                     @endif

@@ -5,12 +5,16 @@
                 <li class="active"><a href="{{ route('userDashboard', Auth::user()->id) }}">
                     {{ trans('dashboard_menu.dashboard') }}
                 </a></li>
-                <li><a href="guide-detail-setting-edit-profile.html">
-                    {{ trans('dashboard_menu.editProfile') }}
-                </a></li>
-                <li><a href="guide-detail-setting-change-pass.html">
-                    {{ trans('dashboard_menu.changePassword') }}
-                </a></li>
+                <li>
+                    <a href="{{ route('getEditProfile', Auth::user()->id) }}">
+                        {{ trans('dashboard_menu.editProfile') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('getChangePassword', Auth::user()->id) }}">
+                        {{ trans('dashboard_menu.changePassword') }}
+                    </a>
+                </li>
                 @if(check_freelancer(Auth::user()))
                     <li>
                         <a href="{{ route('userDashboardEvents', Auth::user()->id) }}">
@@ -24,8 +28,13 @@
                             {{ trans('dashboard_menu.myRequestEvents') }}
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('listForkEvent', Auth::user()->id) }}">
+                            {{ trans('dashboard_menu.myForkEvents') }}
+                        </a>
+                    </li>
                 @endif
-                <li><a href="#">
+                <li><a data-toggle="modal" href="javascript:void(0)" onclick="logout()">
                     {{ trans('dashboard_menu.logout') }}
                 </a></li>
             </ul>

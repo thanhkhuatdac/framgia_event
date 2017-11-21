@@ -1,4 +1,4 @@
-@if ($errors->has('email') || old('email') != null)
+@if ($errors->has('email') || old('email') != null || Session::has('updatedPass'))
     @push('scripts')
         {{ Html::script('js/login-modal.js') }}
     @endpush
@@ -28,6 +28,11 @@
                     <div><span>{{ trans('login.or') }}</span></div>
                 </div>
             </div>
+            @if(Session::has('updatedPass'))
+                <div class="alert alert-success">
+                    {{ session('updatedPass') }}
+                </div>
+            @endif
             <form method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
                 <div class="col-sm-12 col-md-12">

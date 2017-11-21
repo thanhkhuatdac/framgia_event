@@ -23,6 +23,25 @@ use DB;
 
 class EventForkController extends Controller
 {
+    public function showList($userId)
+    {
+        $user = User::getUser($userId)->first();
+        $eventForks = EventFork::getUserEventForks($userId)->with('eventPlan')->paginate(5);
+
+        return view('front.users.dashboard.event_forks.list', compact('user', 'eventForks'));
+    }
+
+    public function getRemove($userId, $eventForkId)
+    {
+        $eventFork = EventFork::find($eventForkId);
+        if (!$eventFork) {
+            return view('errors.403');
+        }
+        $eventFork->delete();
+
+        return redirect()->back()->with('removed', 'Remove Event Successfuly');
+    }
+
     public function showEventFork($userId, $eventForkId)
     {
         $eventFork = EventFork::getById($eventForkId)->first();
