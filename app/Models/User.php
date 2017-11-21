@@ -87,7 +87,6 @@ class User extends Authenticatable
 
     public function scopeGetTopFreelancers($query)
     {
-        return $query->where('role', 'freelancer')->select('score', DB::raw('MAX(score) as max'))
-            ->groupBy('score')->OrderByDESC('score');
+        return $query->where('role', 'freelancer')->OrderByDESC('score');
     }
 }

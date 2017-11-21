@@ -212,16 +212,16 @@
                                                 </h4>
                                                 <ul class="user-meta">
                                                     <li>
-                                                        {{ $userInTop->event_plans_count }}
-                                                        {{ trans('event_plans_index.events') }}
+                                                        {{ trans('event_plans_index.event') }}
+                                                        <span class="turquoise service-name">
+                                                            {{ $userInTop->event_plans_count }}
+                                                        </span>
                                                     </li>
                                                     <li>
-                                                        {{ $userInTop->reviews_count }}
-                                                        {{ trans('event_plans_index.reviews') }}
-                                                    </li>
-                                                    <li>
-                                                        {{ trans('event_plans_index.scores') }}
-                                                        {{ $userInTop->score }}
+                                                        {{ trans('event_plans_index.score') }}
+                                                        <span class="turquoise service-name">
+                                                            {{ $userInTop->score }}
+                                                        </span>
                                                     </li>
                                                 </ul>
                                             </div>

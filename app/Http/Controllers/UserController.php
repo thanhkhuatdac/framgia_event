@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $user = User::getUser($id)->withCount('requestEvents', 'eventPlans', 'comments', 'eventForks')
             ->with('socialLinks')->first();
-        $topUsers = User::getTopFreelancers()->take(10)->get();
+        $topUsers = User::getTopFreelancers()->withCount('eventPlans')->limit(10)->get();
 
         return view('front.users.details.profile', compact('user', 'topUsers'));
     }
@@ -38,7 +38,7 @@ class UserController extends Controller
     public function getAllRequestEvents($userId)
     {
         $user = User::getUser($userId)->first();
-        $topUsers = User::getTopFreelancers()->take(10)->get();
+        $topUsers = User::getTopFreelancers()->withCount('eventPlans')->limit(10)->get();
         $requestEvents = RequestEvent::getUserRequestEvents($userId)->paginate(7);
 
         return view('front.users.details.request_events', compact('user', 'topUsers', 'requestEvents'));
@@ -47,7 +47,7 @@ class UserController extends Controller
     public function getAllEventPlans($userId)
     {
         $user = User::getUser($userId)->first();
-        $topUsers = User::getTopFreelancers()->take(10)->get();
+        $topUsers = User::getTopFreelancers()->withCount('eventPlans')->limit(10)->get();
         $eventPlans = EventPlan::getUserEventPlans($userId)->paginate(7);
 
         return view('front.users.details.event_plans', compact('user', 'topUsers', 'eventPlans'));
@@ -183,7 +183,7 @@ class UserController extends Controller
     {
         $user = User::getUser($id)->first();
         $eventPlans = EventPlan::getUserEventPlans($id)
-            ->with('subject', 'eventForks')->withCount('eventForks')->get();
+            ->with('subject', 'eventForks')->withCount('eventForks')->paginate(5);
 
         return view('front.users.dashboard.event_plans',
             compact('eventPlans', 'user'));

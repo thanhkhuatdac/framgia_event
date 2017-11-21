@@ -84,4 +84,15 @@ class EventPlanController extends Controller
 
         return 'Add Reply Review Successfuly';
     }
+
+    public function getRemove($userId, $eventPlanId)
+    {
+        $eventPlan = EventPlan::find($eventPlanId);
+        if (!$eventPlan) {
+            return view('errors.403');
+        }
+        $eventPlan->delete();
+
+        return redirect()->back()->with('removed', 'Remove Event Successfuly');
+    }
 }

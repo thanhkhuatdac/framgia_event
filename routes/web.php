@@ -74,6 +74,9 @@ Route::group(['prefix' => 'user'], function () {
 
             Route::get('show-demo/{slug}', 'UserController@showDemoEvent')
                 ->name('showDemoEvent');
+
+            Route::get('remove/{eventPlanId}', 'EventPlanController@getRemove')
+                ->name('getRemoveEventPlan');
         });
 
         Route::group(['prefix' => 'request-event'], function () {
