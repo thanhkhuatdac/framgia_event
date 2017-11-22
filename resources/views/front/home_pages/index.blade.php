@@ -165,7 +165,7 @@
                         <div class="GridLex-col-4_mdd-4_sm-6_xs-6_xss-12">
                             <div class="trip-guide-item">
                                 <a href="{{ route('eventPlanIndex', $eventPlan->slug) }}">
-                                    <div class="trip-guide-image">
+                                    <div class="trip-guide-image home-event-images">
                                         {{ Html::image(config('asset.image_path.event_plan') .
                                             $eventPlan->image) }}
                                     </div>

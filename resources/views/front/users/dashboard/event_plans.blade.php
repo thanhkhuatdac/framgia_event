@@ -10,6 +10,11 @@
             <div class="col-xs-12 col-sm-8 col-md-9 mt-20">
                 <div class="dashboard-wrapper">
                     <h4 class="section-title">{{ trans('dashboard_event_plans.title') }}</h4>
+                    @if(Session::has('removed'))
+                        <div class="alert alert-success">
+                            {{ session('removed') }}
+                        </div>
+                    @endif
                     <p class="mmt-15 mb-20">
                         <a href="{{ route('userDashboardCreateNewEvent', $user->id) }}" class="btn btn-primary btn-sm">
                             {{ trans('dashboard_event_plans.create') }}
@@ -20,7 +25,9 @@
                             <div class="trip-list-item">
                                 <div class="image-absolute">
                                     <div class="image image-object-fit image-object-fit-cover">
-                                        {{ Html::image(config('asset.image_path.event_plan') . $eventPlan->image, $eventPlan->slug) }}
+                                        <a href="{{ route('eventPlanIndex', $eventPlan->slug) }}">
+                                            {{ Html::image(config('asset.image_path.event_plan') . $eventPlan->image, $eventPlan->slug) }}
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="content">
@@ -28,7 +35,11 @@
                                         <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-middle">
                                             <div class="GridLex-col-7_sm-12_xs-12_xss-12">
                                                 <div class="GridLex-inner">
-                                                    <h6>{{ $eventPlan->title }}</h6>
+                                                    <h6>
+                                                        <a href="{{ route('eventPlanIndex', $eventPlan->slug) }}">
+                                                            {{ $eventPlan->title }}
+                                                        </a>
+                                                    </h6>
                                                     <span class="font-italic font14">&nbsp;</span>
                                                 </div>
                                             </div>
@@ -39,9 +50,21 @@
                                             </div>
                                             <div class="GridLex-col-4_sm-8_xs-8_xss-8">
                                                 <div class="GridLex-inner text-right">
-                                                    <a href="#" class="btn btn-primary btn-sm">{{ trans('dashboard_event_plans.view') }}</a>
-                                                    <a href="#" class="btn btn-info btn-sm">{{ trans('dashboard_event_plans.edit') }}</a>
-                                                    <a href="#" class="btn btn-danger btn-sm">{{ trans('dashboard_event_plans.delete') }}</a>
+                                                    @if($eventPlan->active != 0)
+                                                        <a href="{{ route('eventPlanIndex', $eventPlan->slug) }}" class="btn btn-primary btn-sm">
+                                                            {{ trans('dashboard_event_plans.view') }}
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('showDemoEvent', [Auth::user()->id, $eventPlan->slug]) }}" class="btn btn-info btn-sm">
+                                                            {{ trans('dashboard_event_plans.preview') }}
+                                                        </a>
+                                                    @endif
+                                                    <a href="#" class="btn btn-info btn-sm display-none">
+                                                        {{ trans('dashboard_event_plans.edit') }}
+                                                    </a>
+                                                    <a href="{{ route('getRemoveEventPlan', [Auth::user()->id, $eventPlan->id]) }}" class="btn btn-danger btn-sm">
+                                                        {{ trans('dashboard_event_plans.delete') }}
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -53,23 +76,8 @@
                     <div class="pager-wrappper text-left clearfix bt mt-0 pt-20">
                         <div class="pager-innner">
                             <div class="clearfix">
-                                {{ trans('dashboard_event_plans.showing') }}
-                            </div>
-                            <div class="clearfix">
                                 <nav>
-                                    <ul class="pagination">
-                                        <li>
-                                            <a href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <li class="active"><a href="#"></a></li>
-                                        <li>
-                                            <a href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    {{ $eventPlans->links() }}
                                 </nav>
                             </div>
                         </div>

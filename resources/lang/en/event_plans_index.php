@@ -30,4 +30,6 @@ return [
     'login' => 'Login',
     'loginNotif' => 'Log in to be able to comment for this event!',
     'fork' => '--- Fork this Event ---',
+    'event' => 'Event: ',
+    'score' => 'Score: ',
 ];

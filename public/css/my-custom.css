@@ -208,3 +208,6 @@ ul.review-list li .review-replied {
     line-height: 1.25;
     padding-top: 5px;
 }
+.home-event-images img{
+    height: 270px;
+}
