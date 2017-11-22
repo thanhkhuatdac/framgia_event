@@ -34,6 +34,24 @@ class EventPlanController extends Controller
         return view('front.event_plans.index', compact('eventPlan', 'user', 'planDetails', 'reviews', 'relatedEventPlans'));
     }
 
+    public function showAll()
+    {
+        $eventPlans = EventPlan::getAll()->with('user')->paginate(8);
+
+        return view('front.event_plans.all', compact('eventPlans'));
+    }
+
+    public function search(Request $request)
+    {
+        if (!$request->ajax()) {
+            return view('errors.403');
+        }
+        $eventPlans = EventPlan::search($request->keyword)->with('user')->get();
+        $result = view('front.event_plans._sections.searchResult', compact('eventPlans'))->render();
+
+        return $result;
+    }
+
     public function addReview(EventPlanRequest $request)
     {
         if (!$request->ajax()) {

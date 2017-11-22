@@ -77,4 +77,9 @@ class EventPlan extends Model
     {
         return $query->where('active', 1)->orderBy('id', 'ASC');
     }
+
+    public function scopeSearch($query, $keyword)
+    {
+        return $query->where('title','like','%'.$keyword.'%');
+    }
 }

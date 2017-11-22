@@ -1,4 +1,7 @@
 @extends('front.main_layouts.master')
+@push('scripts')
+    {{ Html::script('js/search-events.js') }}
+@endpush
 @section('content')
 
 <div class="breadcrumb-image-bg bg-default subject-title-bg">
@@ -6,14 +9,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                    <h2>{{ $subject->title }}</h2>
+                    <h2>{{ trans('subjects_index.allEvents') }}</h2>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="filter-full-width-wrapper">
-    <form class="">
+    <form class="" action="" method="post">
         <div class="filter-full-primary">
             <div class="container">
                 <div class="filter-full-primary-inner">
@@ -22,7 +25,16 @@
                             <div class="col-xs-12 col-sm-12 col-md-6">
                                 <div class="filter-item bb-sm no-bb-xss">
                                     <div class="input-group input-group-addon-icon no-border no-br-sm">
-                                        &nbsp;
+                                        <span class="input-group-addon input-group-addon-icon bg-white">
+                                            <label>
+                                                <i class="fa fa-search"></i>
+                                                {{ trans('subjects_index.search') }}
+                                            </label>
+                                        </span>
+                                        <input type="text" class="form-control"
+                                            id="autocompleteTagging" value=""
+                                            data-url="{{ route('searchEvents') }}"
+                                            placeholder="{{ trans('subjects_index.searchPlace') }}" />
                                     </div>
                                 </div>
                             </div>
@@ -36,7 +48,7 @@
 <div class="pt-30 pb-50">
     <div class="container">
         <div class="trip-guide-wrapper">
-            <div class="GridLex-gap-20 GridLex-gap-15-mdd GridLex-gap-10-xs">
+            <div class="GridLex-gap-20 GridLex-gap-15-mdd GridLex-gap-10-xs" id="search-result">
                 <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-center">
                     @foreach($eventPlans as $eventPlan)
                         <div class="GridLex-col-3_mdd-4_sm-6_xs-6_xss-12">
