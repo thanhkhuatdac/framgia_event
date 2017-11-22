@@ -408,7 +408,7 @@
 <div class="multiple-sticky no-border hidden-sm hidden-xs">&#032;</div>
 <div class="bg-light pt-50 pb-70">
     <div class="container">
-        <h2 class="font-lg">{{ trans('event_plans_index.RelatdedTours') }}</h2>
+        <h2 class="font-lg">{{ trans('event_plans_index.RelatdedEvents') }}</h2>
         <div class="trip-guide-wrapper">
             <div class="GridLex-gap-20 GridLex-gap-10-mdd GridLex-gap-5-xs">
                 <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-center">

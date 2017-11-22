@@ -25,9 +25,15 @@
                             <div class="trip-list-item">
                                 <div class="image-absolute">
                                     <div class="image image-object-fit image-object-fit-cover">
-                                        <a href="{{ route('eventPlanIndex', $eventPlan->slug) }}">
-                                            {{ Html::image(config('asset.image_path.event_plan') . $eventPlan->image, $eventPlan->slug) }}
-                                        </a>
+                                        @if($eventPlan->active != 0)
+                                            <a href="{{ route('eventPlanIndex', $eventPlan->slug) }}">
+                                                {{ Html::image(config('asset.image_path.event_plan') . $eventPlan->image, $eventPlan->slug) }}
+                                            </a>
+                                        @else
+                                            <a href="{{ route('showDemoEvent', [Auth::user()->id, $eventPlan->slug]) }}">
+                                                {{ Html::image(config('asset.image_path.event_plan') . $eventPlan->image, $eventPlan->slug) }}
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="content">
@@ -35,12 +41,21 @@
                                         <div class="GridLex-grid-noGutter-equalHeight GridLex-grid-middle">
                                             <div class="GridLex-col-7_sm-12_xs-12_xss-12">
                                                 <div class="GridLex-inner">
-                                                    <h6>
-                                                        <a href="{{ route('eventPlanIndex', $eventPlan->slug) }}">
-                                                            {{ $eventPlan->title }}
-                                                        </a>
-                                                    </h6>
-                                                    <span class="font-italic font14">&nbsp;</span>
+                                                    @if($eventPlan->active != 0)
+                                                        <h6>
+                                                            <a href="{{ route('eventPlanIndex', $eventPlan->slug) }}">
+                                                                {{ $eventPlan->title }}
+                                                            </a>
+                                                        </h6>
+                                                        <span class="font-italic font14">&nbsp;</span>
+                                                    @else
+                                                        <h6>
+                                                            <a href="{{ route('showDemoEvent', [Auth::user()->id, $eventPlan->slug]) }}">
+                                                                {{ $eventPlan->title }}
+                                                            </a>
+                                                        </h6>
+                                                        <span class="font-italic font14">&nbsp;</span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="GridLex-col-1_sm-4_xs-4_xss-4">

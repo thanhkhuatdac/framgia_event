@@ -21,6 +21,9 @@ class EventPlanController extends Controller
     {
         $eventPlan = EventPlan::getEventPlan($slug)->with('user', 'albums')
             ->withCount('reviews')->first();
+        if (!$eventPlan) {
+            return view('errors.403');
+        }
         $user = User::getUser($eventPlan->user_id)->withCount('reviews', 'eventPlans')
             ->first();
         $planDetails = EventPlanDetail::getDetailOfPlan($eventPlan->id)->with('forkPlanServices')->get();

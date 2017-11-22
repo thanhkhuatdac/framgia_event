@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use App\Models\Subject;
+use App\Models\EventPlan;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,15 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'subjects' => $subjects
             ]);
+        });
+
+        view()->composer(['back.main_layouts.slide_menu'], function($view){
+            $pendingEventCount = count(EventPlan::getPending()->get());
+            if ($pendingEventCount) {
+                $view->with([
+                    'pendingEventCount' => $pendingEventCount
+                ]);
+            }
         });
     }
 

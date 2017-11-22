@@ -21,7 +21,7 @@ return [
     'YourRating' => 'Your rating: ',
     'YourMessage' => 'Your Message: ',
     'Submit' => 'Submit',
-    'RelatdedTours' => 'Relatded tours',
+    'RelatdedEvents' => 'Relatded Events',
     'by' => 'By: ',
     'price' => 'Price: ',
     '#' => '#',

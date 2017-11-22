@@ -28,7 +28,7 @@
             <div class="content-bottom">
                 <div class="container">
                     <div class="inner-bottom">
-                        <ul class="user-header-menu">
+                        <ul class="user-header-menu" id="responsive-menu">
                             <li class="active">
                                 <a href="{{ route('userProfile', $user->id) }}">
                                     {{ trans('user_header.profile') }}
@@ -48,13 +48,33 @@
                                     </a>
                                 </li>
                             @endif
-                            @if($user->id == Auth::user()->id)
+                            @if(Auth::check() && $user->id == Auth::user()->id)
                                 <li>
                                     <a href="{{route('userDashboard', $user->id)}}">
                                         {{ trans('user_header.dashboard') }}
                                     </a>
                                 </li>
                             @endif
+                            <li style="position: relative;">
+                                <a href="javascript:void(0)" id="show-notif">
+                                    <i class="fa fa-globe"></i>
+                                    <span id="notif-count"></span>
+                                    Notification
+                                </a>
+                                <ul id="list-notif" style="display: none;
+                                    position: absolute;
+                                    width: 300px;
+                                    background: #1abc9c;
+                                    color: #fff;
+                                    margin-top: 0;
+                                    word-wrap: break-word;
+                                    border-radius: 10px;
+                                    padding: 5px;
+                                    z-index: 999;
+                                    border: 1px solid #D9DEE4;">
+
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>

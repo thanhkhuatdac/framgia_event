@@ -19,6 +19,10 @@
     {{ Html::style('css/my-custom.css') }}
 </head>
 <body class="home transparent-header">
+    <div id="realtime" data-pusher-key={{ env('PUSHER_APP_KEY') }}></div>
+    @if(Auth::check())
+        <div id="realtime-user" data-current-id={{ Auth::user()->id }}></div>
+    @endif
     {{-- <div id="introLoader" class="introLoading"></div> --}}
     <div class="container-wrapper">
 
@@ -51,6 +55,8 @@
     {{ Html::script('assets/photoset-grid/jquery.photoset-grid.min.js') }}
     {{ Html::script('assets/photoset-grid/js/jquery.colorbox.js') }}
     {{ Html::script('js/my-custom.js') }}
+    {{ Html::script('assets/pusher-js/dist/web/pusher.min.js') }}
+    {{ Html::script('js/listen-notif.js') }}
 
     @stack('scripts')
     @yield('script')
