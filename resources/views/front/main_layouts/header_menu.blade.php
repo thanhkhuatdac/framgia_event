@@ -14,7 +14,7 @@
                         <a href="{{ route('home') }}">{{ trans('header_menu.home') }}</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)">
+                        <a href="{{ route('allEvents') }}">
                         {{ trans('header_menu.offeredEvent') }}
                         </a>
                         <ul>

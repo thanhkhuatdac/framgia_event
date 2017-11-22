@@ -14,6 +14,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@getIndex')->name('home');
 Route::get('subjects/{slug}', 'SubjectController@index')->name('allEventPlans');
+Route::get('event-plans', 'EventPlanController@showAll')->name('allEvents');
+Route::post('search-event-plans', 'EventPlanController@search')->name('searchEvents');
 Route::get('requested-events', 'RequestEventController@showAll')->name('allRequestEvent');
 
 Route::group(['prefix' => 'event-plan'], function () {
