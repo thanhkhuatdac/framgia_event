@@ -290,3 +290,34 @@ ul.review-list li .review-replied {
     width: 70px;
     height: 70px;
 }
+.li-parent-list-notif {
+    position: relative;
+}
+#list-notif {
+    display: none;
+    position: absolute;
+    width: 300px;
+    background: #1abc9c;
+    color: #fff;
+    margin-top: 0;
+    word-wrap: break-word;
+    border-radius: 10px;
+    padding: 5px;
+    z-index: 999;
+    border: 1px solid #D9DEE4;
+}
+.notif {
+    word-wrap: break-word;
+    width: 97%;
+    padding: 10px !important;
+}
+.notif>span {
+    word-wrap: break-word;
+    width: 100%;
+}
+.notif>span>strong>a {
+    margin-right: 0px !important;
+}
+.white {
+    color: #fff;
+}

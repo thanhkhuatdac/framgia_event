@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use App\Models\Subject;
 use App\Models\EventPlan;
+use App\Models\Follow;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,13 @@ class AppServiceProvider extends ServiceProvider
                     'pendingEventCount' => $pendingEventCount
                 ]);
             }
+        });
+
+        view()->composer(['front.users._sections.user_header'], function($view){
+            $follow = Follow::all();
+            $view->with([
+                'follow' => $follow
+            ]);
         });
     }
 

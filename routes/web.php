@@ -45,6 +45,12 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('callback/{social}', 'UserController@callback')
         ->name('socialCalllBack');
 
+    Route::get('/{id}/follow', 'FollowController@follow')->name('followUser');
+    Route::get('/{id}/unfollow', 'FollowController@unfollow')->name('unfollowUser');
+
+    Route::get('/{id}/list-following', 'FollowController@listFollowing')->name('listFollowing');
+    Route::get('/{id}/list-follower', 'FollowController@listFollower')->name('listFollower');
+
     Route::group(['prefix' => 'dashboard/{id}', 'middleware' => 'AuthUser'], function () {
         Route::get('/', 'UserController@getDashboard')->name('userDashboard');
         Route::get('edit-profile', 'UserController@getEditProfile')->name('getEditProfile');

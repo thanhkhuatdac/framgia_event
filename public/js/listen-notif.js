@@ -11,8 +11,25 @@ $(document).ready(function () {
     });
 
     var notif_array = new Array();
+
     var chanelListenNotif = pusher.subscribe('approve-event-plans');
     chanelListenNotif.bind('App\\Events\\ApproveEvent', function(data) {
+        var userId = data.userId;
+        var notif = data.notif;
+
+        var currentUserId = $('#realtime-user').data('current-id');
+
+        if (currentUserId == userId) {
+            notif_array.push(notif);
+            var count_notif = notif_array.length;
+
+            $('#list-notif').prepend(notif);
+            $('#notif-count').show().html(count_notif);
+        }
+    });
+
+    var chanelFollowNotif = pusher.subscribe('follow-notification');
+    chanelFollowNotif.bind('App\\Events\\FollowNotifEvent', function(data) {
         var userId = data.userId;
         var notif = data.notif;
 

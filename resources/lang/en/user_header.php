@@ -2,6 +2,7 @@
 
 return [
     'follow' => 'Follow',
+    'unfollow' => 'Unfollow',
     'based_on' => 'based on',
     'reviews' => 'Reviews',
     'profile' => 'Profile',
@@ -10,4 +11,6 @@ return [
     'followings' => 'Followings',
     'followers' => 'Followers',
     'dashboard' => 'Dashboard',
+    '|' => '|',
+    'notification' => 'Notification',
 ];

@@ -57,6 +57,7 @@
     {{ Html::script('js/my-custom.js') }}
     {{ Html::script('assets/pusher-js/dist/web/pusher.min.js') }}
     {{ Html::script('js/listen-notif.js') }}
+    {{ Html::script('js/follow.js') }}
 
     @stack('scripts')
     @yield('script')
