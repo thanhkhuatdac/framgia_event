@@ -5904,14 +5904,3 @@ ul.social-share-sm.for-useful li a:after {
 }
 
 @media (max-width: 479px) {}
-
-
-.img-bg-01 {
-    background-image:url('../images/hero-header/01.jpg');
-}
-.img-bg-02 {
-    background-image:url('../images/hero-header/02.jpg');
-}
-.img-bg-how-it-work {
-    background-image:url('../images/how-it-work-1.jpg.html');
-}

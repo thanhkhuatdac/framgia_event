@@ -124,3 +124,22 @@ Route::group(['prefix' => 'user'], function () {
             ->name('addForkService');
     });
 });
+
+Route::group(['prefix' => 'admin', 'middleware' => 'AdminDashboard'], function () {
+    Route::get('dashboard', 'DashboardController@index')->name('homeDashboard');
+
+    Route::group(['prefix'=>'event-plans'], function(){
+        Route::get('published','DashboardController@eventPlanPublished')
+            ->name('eventPlanPublished');
+        Route::get('pending','DashboardController@eventPlanPending')
+            ->name('eventPlanPending');
+        Route::get('remove/{eventPlanId}', 'DashboardController@getRemoveEventPlanPending')
+            ->name('getRemovePending');
+        Route::get('preview-event/{slug}', 'DashboardController@previewDemoEvent')
+            ->name('previewDemoEvent');
+        Route::get('approve-event/{id}', 'DashboardController@approveEvent')
+            ->name('approveEvent');
+        Route::get('unapprove-event/{id}', 'DashboardController@unapproveEvent')
+            ->name('unapproveEvent');
+    });
+});

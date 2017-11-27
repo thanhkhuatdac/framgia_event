@@ -17,6 +17,7 @@ use App\Events\ForkRemoveServiceEvent;
 use App\Events\ForkAddServiceEvent;
 use App\Events\ForkLoadDetailAmountEvent;
 use App\Events\ForkLoadEventAmountEvent;
+use App\Events\ApproveEvent;
 use App\Http\Requests\ForkServiceRequest;
 use Carbon;
 use DB;
@@ -97,6 +98,13 @@ class EventForkController extends Controller
 
             return $newEventFork;
         });
+
+        $eventPlan->user->score += 1;
+        $eventPlan->user->save();
+
+        $notif = view('front.main_layouts._sections.forkNotif', compact('eventPlan', 'eventFork'))
+            ->render();
+        event(new ApproveEvent($notif, $eventPlan->user_id));
 
         return view('front.event_forks.show', compact('eventFork'));
     }

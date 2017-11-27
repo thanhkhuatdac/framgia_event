@@ -40,6 +40,13 @@
                         <li><a data-toggle="modal" href="#registerModal"><i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" title="sign up"></i></a></li>
                         <li><a data-toggle="modal" href="#loginModal"><i class="icon-login" data-toggle="tooltip" data-placement="bottom" title="login"></i> </a></li>
                     @else
+                        @if(Auth::user()->role == 'admin')
+                            <li>
+                                <a data-toggle="modal" href="{{ route('homeDashboard') }}">
+                                <i class="fa fa-tachometer" data-toggle="tooltip" data-placement="bottom" title="{{ Auth::user()->name }}"></i>
+                                </a>
+                            </li>
+                        @endif
                         <li><a data-toggle="modal" href="{{ route('userDashboard', Auth::user()->id) }}">
                             <i class="icon-user" data-toggle="tooltip" data-placement="bottom" title="{{ Auth::user()->name }}"></i>
                         </a></li>

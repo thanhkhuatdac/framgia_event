@@ -25,6 +25,21 @@
     "photoset-grid": "^1.0.1",
     "pusher-js": "pusher#^4.2.1",
     "bootstrap-fileinput": "https://github.com/kartik-v/bootstrap-fileinput.git#^4.4.6",
-    "bootstrap3-wysihtml5-bower": "https://github.com/Waxolunist/bootstrap3-wysihtml5-bower.git#^0.3.3"
+    "bootstrap3-wysihtml5-bower": "https://github.com/Waxolunist/bootstrap3-wysihtml5-bower.git#^0.3.3",
+    "datatables.net": "^1.10.16",
+    "datatables.net-bs": "^2.1.1",
+    "datatables.net-buttons-bs": "^1.4.1",
+    "datatables.net-fixedheader-bs": "^3.1.2",
+    "datatables.net-responsive-bs": "^2.1.1",
+    "datatables.net-scroller-bs": "^1.4.2",
+    "datatables.net-keytable-bs": "^2.3.1",
+    "iCheck": "https://github.com/fronteed/icheck.git#^1.0.2",
+    "switchery": "^0.8.2",
+    "icheck-bootstrap": "^1.0.7",
+    "jquery-migrate": "^3.0.0",
+    "components-font-awesome": "^4.7.0",
+    "nprogress": "^0.2.0",
+    "bootstrap-min-only": "^3.3.5",
+    "gentelella-master-frontend": "https://github.com/trungquan17/gentelella-master-frontend.git"
   }
 }
