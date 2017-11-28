@@ -15,8 +15,50 @@
                                             <h3>{{ $user->name }}</h3>
                                         </div>
                                         <ul class="user-meta">
-                                            <li><i class="fa fa-map-marker"></i> {{ $user->address }} <span class="mh-5 text-muted">|</span> <i class="fa fa-phone"></i> {{ $user->phone }}</li>
-                                            <li>&nbsp;</li>
+                                            <li>
+                                                <i class="fa fa-map-marker"></i> {{ $user->address }}
+                                                <span class="mh-5 text-muted">
+                                                    {{ trans('user_header.|') }}
+                                                </span>
+                                                <i class="fa fa-phone"></i> {{ $user->phone }}
+                                            </li>
+                                            @if(Auth::check() && $user->id == Auth::user()->id)
+                                                <li>&nbsp;</li>
+                                            @elseif(Auth::check())
+                                                <li>
+                                                    @if(!check_follow($follow, Auth::user()->id, $user->id))
+                                                        <a href="{{ route('followUser', Auth::user()->id) }}"
+                                                            class="btn btn-primary btn-xs btn-border"
+                                                            data-user-following="{{ Auth::user()->id }}"
+                                                            data-user-follower="{{ $user->id }}"
+                                                            id="link-follow">
+                                                            {{ trans('user_header.follow') }}
+                                                        </a>
+                                                        <a href="{{ route('unfollowUser', Auth::user()->id) }}"
+                                                            class="btn btn-primary btn-xs btn-border display-none"
+                                                            data-user-following="{{ Auth::user()->id }}"
+                                                            data-user-follower="{{ $user->id }}"
+                                                            id="link-unfollow">
+                                                            {{ trans('user_header.unfollow') }}
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('followUser', Auth::user()->id) }}"
+                                                            class="btn btn-primary btn-xs btn-border display-none"
+                                                            data-user-following="{{ Auth::user()->id }}"
+                                                            data-user-follower="{{ $user->id }}"
+                                                            id="link-follow">
+                                                            {{ trans('user_header.follow') }}
+                                                        </a>
+                                                        <a href="{{ route('unfollowUser', Auth::user()->id) }}"
+                                                            class="btn btn-primary btn-xs btn-border"
+                                                            data-user-following="{{ Auth::user()->id }}"
+                                                            data-user-follower="{{ $user->id }}"
+                                                            id="link-unfollow">
+                                                            {{ trans('user_header.unfollow') }}
+                                                        </a>
+                                                    @endif
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -50,30 +92,30 @@
                             @endif
                             @if(Auth::check() && $user->id == Auth::user()->id)
                                 <li>
-                                    <a href="{{route('userDashboard', $user->id)}}">
+                                    <a href="{{ route('userDashboard', $user->id) }}">
                                         {{ trans('user_header.dashboard') }}
                                     </a>
                                 </li>
                             @endif
-                            <li style="position: relative;">
+                            <li>
+                                <a href="{{ route('listFollowing', $user->id) }}">
+                                    {{ trans('user_header.followings') }}
+                                    <span>{{ count_following($follow, $user->id) }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('listFollower', $user->id) }}">
+                                    {{ trans('user_header.followers') }}
+                                    <span>{{ count_follower($follow, $user->id) }}</span>
+                                </a>
+                            </li>
+                            <li class="li-parent-list-notif">
                                 <a href="javascript:void(0)" id="show-notif">
                                     <i class="fa fa-globe"></i>
                                     <span id="notif-count"></span>
-                                    Notification
+                                    {{ trans('user_header.notification') }}
                                 </a>
-                                <ul id="list-notif" style="display: none;
-                                    position: absolute;
-                                    width: 300px;
-                                    background: #1abc9c;
-                                    color: #fff;
-                                    margin-top: 0;
-                                    word-wrap: break-word;
-                                    border-radius: 10px;
-                                    padding: 5px;
-                                    z-index: 999;
-                                    border: 1px solid #D9DEE4;">
-
-                                </ul>
+                                <ul id="list-notif"></ul>
                             </li>
                         </ul>
                     </div>

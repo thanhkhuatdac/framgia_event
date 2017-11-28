@@ -11,12 +11,13 @@ if (! function_exists('upload_file')) {
                 $name = $file_name;
             }
             $file->move($file_path, $name);
+
             return true;
         } catch (Exception $e) {
             Log::error($e);
-        }
 
-        return false;
+            return false;
+        }
     }
 }
 
@@ -30,13 +31,13 @@ if (! function_exists('convert_vnd')) {
             } else {
                 $vnd = number_format($number).' đồng';
             }
-            return $vnd;
 
+            return $vnd;
         } catch (Exception $e) {
             Log::error($e);
-        }
 
-        return false;
+            return false;
+        }
     }
 }
 
@@ -50,13 +51,13 @@ if (! function_exists('average')) {
             } else {
                 $average = $total/$quantum;
             }
-            return round($average, 1);
 
+            return round($average, 1);
         } catch (Exception $e) {
             Log::error($e);
-        }
 
-        return false;
+            return false;
+        }
     }
 }
 
@@ -66,13 +67,13 @@ if (! function_exists('limit_characters')) {
     {
         try {
             $result = str_limit($content, $limit, $end);
-            return $result;
 
+            return $result;
         } catch (Exception $e) {
             Log::error($e);
-        }
 
-        return false;
+            return false;
+        }
     }
 }
 
@@ -80,16 +81,7 @@ if (! function_exists('check_freelancer')) {
 
     function check_freelancer($user)
     {
-        try {
-            if ($user->role == 'freelancer') {
-                return true;
-            }
-
-        } catch (Exception $e) {
-            Log::error($e);
-        }
-
-        return false;
+        return $user->role == 'freelancer' ? true : false;
     }
 }
 
@@ -97,15 +89,67 @@ if (! function_exists('check_customer')) {
 
     function check_customer($user)
     {
+        return $user->role == 'customer' ? true : false;
+    }
+}
+
+if (! function_exists('check_follow')) {
+
+    function check_follow($follow, $userFollowing, $userFollower)
+    {
         try {
-            if ($user->role == 'customer') {
-                return true;
+            foreach ($follow as $item) {
+                if ($item->following_id == $userFollowing && $item->follower_id == $userFollower) {
+                    return true;
+                }
             }
 
         } catch (Exception $e) {
             Log::error($e);
-        }
 
-        return false;
+            return false;
+        }
+    }
+}
+
+if (! function_exists('count_following')) {
+
+    function count_following($follow, $targetUserId)
+    {
+        try {
+            $count = 0;
+            foreach ($follow as $item) {
+                if ($item->following_id == $targetUserId) {
+                    $count++;
+                }
+            }
+            return $count;
+
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return false;
+        }
+    }
+}
+
+if (! function_exists('count_follower')) {
+
+    function count_follower($follow, $targetUserId)
+    {
+        try {
+            $count = 0;
+            foreach ($follow as $item) {
+                if ($item->follower_id == $targetUserId) {
+                    $count++;
+                }
+            }
+            return $count;
+
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return false;
+        }
     }
 }
