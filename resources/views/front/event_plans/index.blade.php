@@ -391,7 +391,7 @@
                     </div>
                 </aside>
                 <br><hr>
-                @if(check_customer(Auth::user()) && (Auth::user()->id != $eventPlan->user_id))
+                @if(Auth::check() && check_customer(Auth::user()) && (Auth::user()->id != $eventPlan->user_id))
                     <aside class="sidebar-wrapper">
                         <div class="hash-tag-wrapper clearfix mt-10 ml-10 ml-0-sm">
                             <a href="{{ route('forkEventPlan', ['id' => Auth::user()->id, 'eventPlanId' => $eventPlan->id]) }}"

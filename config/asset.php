@@ -9,6 +9,7 @@ return [
         'error' => 'images/errors/',
         'album' => 'images/album/',
         'subject' => 'images/subject/',
+        'chat' => 'images/chat/',
     ],
     'active' => [
         'yes' => 1,
