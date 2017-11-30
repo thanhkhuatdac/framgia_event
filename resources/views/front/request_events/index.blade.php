@@ -7,7 +7,8 @@
 @section('content')
 
 <div class="breadcrumb-image-bg detail-breadcrumb"
-    style="background-image:url({{ asset(config('asset.image_path.event_plan') . 'default-request-event.jpg') }});">
+    style="background-image:url({{ asset(config('asset.image_path.event_plan') .
+        'default-bg-title.jpg') }});">
     <div class="container">
         <div class="page-title detail-header-02">
             <div class="row">

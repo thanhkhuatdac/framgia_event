@@ -32,6 +32,14 @@
                             {{ trans('header_menu.requestedEvent') }}
                         </a>
                     </li>
+                    @if(Auth::check())
+                        <li>
+                            <a href="{{ route('chatRoom', Auth::user()->id) }}">
+                                {{ trans('header_menu.chatRoom') }}
+                                <i class="fa fa-commenting-o bold"></i>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </div>
             <div class="nav-mini-wrapper">

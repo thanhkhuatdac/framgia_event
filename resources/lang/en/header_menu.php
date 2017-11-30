@@ -6,4 +6,5 @@ return [
     'requestedEvent' => 'Requested Event',
     'wedding' => 'Wedding',
     'birthday' => 'Birthday',
+    'chatRoom' => 'Chat Room',
 ];

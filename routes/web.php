@@ -58,6 +58,13 @@ Route::group(['prefix' => 'user'], function () {
         Route::get('change-password', 'UserController@getChangePassword')->name('getChangePassword');
         Route::post('change-password', 'UserController@postChangePassword')->name('postChangePassword');
 
+        Route::get('chat-room', 'ChatRoomController@index')->name('chatRoom');
+        Route::post('load-user', 'ChatRoomController@loadUser')->name('loadUserOnline');
+        Route::post('user-leave', 'ChatRoomController@userLeave')->name('loadUserOffline');
+        Route::post('send-message', 'ChatRoomController@sendMessage')->name('userSendMessage');
+        Route::post('load-typing', 'ChatRoomController@loadTyping')->name('loadTyping');
+        Route::post('remove-typing', 'ChatRoomController@removeTyping')->name('removeTyping');
+
         Route::group(['prefix' => 'event'], function () {
             Route::get('/', 'UserController@getDashboardEvents')
                 ->name('userDashboardEvents');
