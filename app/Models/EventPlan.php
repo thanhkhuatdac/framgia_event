@@ -87,4 +87,9 @@ class EventPlan extends Model
     {
         return $query->where('title','like','%'.$keyword.'%');
     }
+
+    public function scopeGetEventPlanBySlug($query, $slug)
+    {
+        return $query->where('slug', $slug);
+    }
 }

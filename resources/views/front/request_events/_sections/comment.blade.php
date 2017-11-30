@@ -3,7 +3,9 @@
         <div class="col-xs-12 col-sm-4 col-md-3">
             <div class="review-header">
                 <h6>
-                    {{ $comment->user->name }}
+                    <a href="{{ route('userProfile', $comment->user->id) }}">
+                        {{ $comment->user->name }}
+                    </a>
                 </h6>
                 <span class="review-date">
                     ({{ $comment->created_at->format('H:i, d/m/Y') }})

@@ -1,4 +1,7 @@
 @extends('front.main_layouts.master')
+@push('scripts')
+    {{ Html::script('js/search-home.js') }}
+@endpush
 @section('content')
 
 <div class="hero img-bg-01">
@@ -6,13 +9,11 @@
         <h1>{{ trans('home_pages.bannerTitle01') }}</h1>
         <form>
             <div class="form-group">
-                <input type="text" placeholder="Eg: {{ trans('home_pages.wedding') }}, {{ trans('home_pages.birthday') }} ..." class="form-control flexdatalist"
-                    data-data="data/countries.json" data-search-in='["name","capital"]'
-                    data-visible-properties='["capital","name","continent"]' data-group-by="continent"
-                    data-selection-required="true" data-focus-first-result="true" data-min-length="1"
-                    data-value-property="iso2" data-text-property="{capital}, {name}"
-                    data-search-contain="false" name="countries">
-                <button class="btn"><i class="icon-magnifier"></i></button>
+                <input type="text" class="form-control" id="typing-search" value=""
+                    data-url-search="{{ route('searchHome') }}"
+                    placeholder="Eg: {{ trans('home_pages.wedding') }}, {{ trans('home_pages.birthday') }} ...">
+                <button type="button" class="btn"><i class="icon-magnifier"></i></button>
+                <ul class="list-group" id="home-search-result"></ul>
             </div>
         </form>
         <div class="top-search">

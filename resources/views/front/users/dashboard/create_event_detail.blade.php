@@ -14,17 +14,27 @@
                 <div class="dashboard-wrapper">
                     @if(Session::has('created_event'))
                         <div class="alert alert-success">
-                            {{session('created_event')}}
+                            {{ session('created_event') }}
                         </div>
                     @endif
                     @if(Session::has('addDetailSuccess'))
                         <div class="alert alert-success">
-                            {{session('addDetailSuccess')}}
+                            {{ session('addDetailSuccess') }}
                         </div>
                     @endif
                     @if(Session::has('addDetailError'))
                         <div class="alert alert-danger">
-                            {{session('addDetailError')}}
+                            {{ session('addDetailError') }}
+                        </div>
+                    @endif
+                    @if(Session::has('detailRemoved'))
+                        <div class="alert alert-success">
+                            {{ session('detailRemoved') }}
+                        </div>
+                    @endif
+                    @if(Session::has('removeError'))
+                        <div class="alert alert-error">
+                            {{ session('removeError') }}
                         </div>
                     @endif
                     <form class="post-form-wrapper" action="{{ route('userDashboardPostCreateEventDetail', Auth::user()->id) }}" method="post">
@@ -38,10 +48,10 @@
                                 {{ trans('dashboard_create_detail.step2') }}
                             </h4>
                             <div class="clear"></div>
-                            <strong><a href="javascript:void(0)">
-                                <i class="fa fa-circle"></i>
+                            <h3><a href="javascript:void(0)">
+                                <i class="fa fa-plus"></i>
                                 {{ trans('dashboard_create_detail.eventDetail') }}
-                            </a></strong>
+                            </a></h3>
                             <div class="clear"></div>
                             <div id="event-detail">
                                 <div class="col-xs-12 col-sm-6 col-md-5">
@@ -75,13 +85,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr>
                             <div class="clear"></div>
                             <div class="col-xs-12 col-sm-6 col-md-12">
-                                <strong><a href="javascript:void(0)" id="toggle-create-event-detail">
-                                    <i class="fa fa-circle"></i>
-                                    {{ trans('dashboard_create_detail.eventServices') }}
-                                </a></strong>
                                 <div class="clear"></div>
                                 <div id="event-services" class="spaceY10">
                                 </div>
@@ -99,15 +104,50 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ trans('dashboard_create_detail.save') }}
                                 </button>
-                                <button type="reset" class="btn btn-primary btn-border">
-                                    {{ trans('dashboard_create_detail.cancel') }}
-                                </button>
-                                <a href="{{ route('showDemoEvent', ['id' => Auth::user()->id, 'slug' => $eventPlan->slug]) }}" class="btn btn-primary btn-border">
-                                    {{ trans('dashboard_create_detail.next') }}
-                                </a>
+                                &nbsp;
+                                @if($eventPlan->active == 0)
+                                    <a href="{{ route('showDemoEvent',
+                                        ['id' => Auth::user()->id, 'slug' => $eventPlan->slug]) }}"
+                                        class="btn btn-primary btn-border"
+                                        target="__blank">
+                                        {{ trans('dashboard_create_detail.preView') }}
+                                    </a>
+                                @elseif($eventPlan->active == 1)
+                                    <a href="{{ route('eventPlanIndex', $eventPlan->slug) }}"
+                                        class="btn btn-primary btn-border"
+                                        target="__blank">
+                                        {{ trans('dashboard_create_detail.view') }}
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </form>
+                    <div class="clear mb-30"></div>
+                    <hr>
+                    <div class="available-detail">
+                        <h3>
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-hashtag"></i>
+                                {{ trans('dashboard_create_detail.availableService') }} &#10141;
+                                {{ convert_vnd($eventPlan->amount) }}
+                            </a>
+                        </h3>
+                        <div class="clear mb-10"></div>
+                        <ul class="list-group" id="available-event-detail">
+                            @foreach($eventPlan->eventPlanDetails as $detail)
+                                <span>{{ $loop->iteration }}.</span>
+                                <li class="list-group-item">
+                                    {{ $detail->name }} &#10141; {{ convert_vnd($detail->amount) }}
+                                </li>
+                                <a href="{{ route('getRemoveDetail',
+                                    ['id' => Auth::user()->id,
+                                    'eventPlanId' => $eventPlan->id, 'detailId' => $detail->id]) }}">
+                                    <i class="fa fa-close"></i>
+                                </a>
+                                <div class="clearfix"></div>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

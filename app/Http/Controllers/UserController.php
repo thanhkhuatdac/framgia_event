@@ -252,7 +252,7 @@ class UserController extends Controller
     public function getCreateEventDetail($id, $slug)
     {
         $user = User::getUser($id)->first();
-        $eventPlan = EventPlan::getEventPlanNoActive($slug)->first();
+        $eventPlan = EventPlan::getEventPlanBySlug($slug)->first();
 
         return view('front.users.dashboard.create_event_detail',
             compact('user', 'eventPlan'));

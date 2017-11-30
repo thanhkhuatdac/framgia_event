@@ -408,3 +408,47 @@ ul.review-list li .review-replied {
 .typing-image {
     width: 10%;
 }
+#home-search-result {
+    margin-top: 5px;
+    display: none;
+}
+#home-search-result li {
+    background: none;
+    color: #fff;
+}
+#home-search-result li:hover {
+    background: rgba(255, 255, 255, 0.3);
+    -webkit-filter: brightness(500%);
+    font-weight: bold;
+}
+#available-event-detail {
+    width: 70%;
+}
+#available-event-detail span {
+    float: left;
+    width: 5%;
+    font-size: 17px;
+    font-weight: bold;
+    color: #e67e22;
+    margin-top: 10px;
+}
+#available-event-detail li {
+    width: 60%;
+    background: #fff;
+    color: #2c3e50;
+    border: 1px solid #7f8c8d;
+    margin-bottom: 5px;
+    float: left;
+}
+#available-event-detail li:hover {
+    color: #d35400;
+}
+#available-event-detail i {
+    color: #d35400;
+    margin: 10px 0px 0px 10px;
+    float: left;
+    font-size: 24px;
+}
+#btn-add-new-service {
+    margin-top: 25px;
+}
