@@ -31,4 +31,9 @@ class Subject extends Model
     {
         return $query->where('slug', $slug);
     }
+
+    public function scopeSearch($query, $keyword)
+    {
+        return $query->where('title', 'like', '%' . $keyword . '%');
+    }
 }

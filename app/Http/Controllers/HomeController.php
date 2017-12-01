@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\EventPlan;
 use App\Models\RequestEvent;
 use App\Models\User;
+use App\Models\Subject;
 
 class HomeController extends Controller
 {
@@ -35,5 +36,16 @@ class HomeController extends Controller
 
         return view('front.home_pages.index', compact('eventPlans', 'freelancerCount',
             'customerCount', 'eventPlanCount', 'requestEventCount'));
+    }
+
+    public function search(Request $request)
+    {
+        if (!$request->ajax()) {
+            return view('errors.403');
+        }
+        $subjects = Subject::search($request->keyword)->get();
+        $result = view('front.home_pages._sections.searchResult', compact('subjects'))->render();
+
+        return $result;
     }
 }

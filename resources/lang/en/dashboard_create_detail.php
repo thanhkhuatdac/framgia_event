@@ -2,16 +2,17 @@
 
 return [
     'step2' => 'Step 2: Create Event Details & Services For Event Plan',
-    'eventDetail' => 'Event Detail',
+    'eventDetail' => 'New Event Detail',
     'name' => 'Name',
     'namePlace' => 'Name',
     'startDate' => 'Start Date',
     'dueDate' => 'Due Date',
     'amount' => 'Amount: ',
     'currency' => '$: ',
-    'eventServices' => 'Event Services',
     'newService' => 'New Service',
-    'save' => 'Save',
+    'save' => 'Save Detail',
     'cancel' => 'Cancel',
-    'next' => 'Next',
+    'preView' => 'Preview',
+    'view' => 'View',
+    'availableService' => 'Available Details',
 ];

@@ -13,6 +13,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@getIndex')->name('home');
+Route::post('search-home', 'HomeController@search')->name('searchHome');
 Route::get('subjects/{slug}', 'SubjectController@index')->name('allEventPlans');
 Route::get('event-plans', 'EventPlanController@showAll')->name('allEvents');
 Route::post('search-event-plans', 'EventPlanController@search')->name('searchEvents');
@@ -92,6 +93,8 @@ Route::group(['prefix' => 'user'], function () {
 
             Route::get('remove/{eventPlanId}', 'EventPlanController@getRemove')
                 ->name('getRemoveEventPlan');
+            Route::get('/{eventPlanId}/remove-detail/{detailId}', 'EventPlanController@getRemoveDetail')
+                ->name('getRemoveDetail');
         });
 
         Route::group(['prefix' => 'request-event'], function () {

@@ -70,11 +70,11 @@
                                                             {{ trans('dashboard_event_plans.view') }}
                                                         </a>
                                                     @else
-                                                        <a href="{{ route('showDemoEvent', [Auth::user()->id, $eventPlan->slug]) }}" class="btn btn-info btn-sm">
+                                                        <a href="{{ route('showDemoEvent', [Auth::user()->id, $eventPlan->slug]) }}" class="btn btn-success btn-sm">
                                                             {{ trans('dashboard_event_plans.preview') }}
                                                         </a>
                                                     @endif
-                                                    <a href="#" class="btn btn-info btn-sm display-none">
+                                                    <a href="{{ route('userDashboardCreateEventDetail', [Auth::user()->id, $eventPlan->slug]) }}" class="btn btn-info btn-sm">
                                                         {{ trans('dashboard_event_plans.edit') }}
                                                     </a>
                                                     <a href="{{ route('getRemoveEventPlan', [Auth::user()->id, $eventPlan->id]) }}" class="btn btn-danger btn-sm">

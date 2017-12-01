@@ -14,6 +14,7 @@ use App\Events\ReplyReviewEvent02;
 use App\Http\Requests\EventPlanRequest;
 use App\Http\Requests\ReplyReviewRequest;
 use Auth;
+use DB;
 
 class EventPlanController extends Controller
 {
@@ -115,5 +116,28 @@ class EventPlanController extends Controller
         $eventPlan->delete();
 
         return redirect()->back()->with('removed', 'Remove Event Successfuly');
+    }
+
+    public function getRemoveDetail($userId, $eventPlanId, $detailId)
+    {
+        $eventPlan = EventPlan::find($eventPlanId);
+        $eventDetail = EventPlanDetail::find($detailId);
+
+        if (!$eventPlan || !$eventDetail || $eventDetail->event_plan_id != $eventPlanId) {
+            return view('errors.403');
+        }
+        $delete = DB::transaction(function () use ($eventPlan, $eventDetail)
+        {
+            $eventPlan->amount -= $eventDetail->amount;
+            $eventPlan->save();
+            $eventDetail->delete();
+            return true;
+        });
+
+        if (!$delete) {
+            return redirect()->back()->with('removeError', 'Oops, can not remove event detail!');
+        }
+
+        return redirect()->back()->with('detailRemoved', 'Remove Event Detail Successfuly');
     }
 }

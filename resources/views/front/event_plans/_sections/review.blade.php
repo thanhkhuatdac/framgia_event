@@ -3,7 +3,9 @@
         <div class="col-xs-12 col-sm-4 col-md-3">
             <div class="review-header">
                 <h6>
-                    {{ $review->user->name }}
+                    <a href="{{ route('userProfile', $review->user->id) }}">
+                        {{ $review->user->name }}
+                    </a>
                 </h6>
                 <span class="review-date">
                     ({{ $review->created_at->format('H:i, d/m/Y') }})
@@ -35,7 +37,9 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-8 col-md-9">
                                     <strong>
-                                        {{ $replied->user->name}}
+                                        <a href="{{ route('userProfile', $replied->user->id) }}">
+                                            {{ $replied->user->name }}
+                                        </a>
                                     </strong>
                                     <span class="review-date">
                                         ({{ $replied->created_at->format('H:i, d/m/Y') }})
