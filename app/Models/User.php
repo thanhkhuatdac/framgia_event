@@ -89,4 +89,14 @@ class User extends Authenticatable
     {
         return $query->where('role', 'freelancer')->OrderByDESC('score');
     }
+
+    public function scopeGetAllNoAdmin($query)
+    {
+        return $query->where('role', '!=', 'admin');
+    }
+
+    public function scopeSearch($query, $keyword)
+    {
+        return $query->where('name', 'like', '%' . $keyword . '%')->where('role', '!=', 'admin');
+    }
 }

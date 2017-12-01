@@ -7,4 +7,7 @@ return [
     'wedding' => 'Wedding',
     'birthday' => 'Birthday',
     'chatRoom' => 'Chat Room',
+    'allUsers' => 'All Users',
+    'freelancers' => 'Freelancers',
+    'customers' => 'Customers',
 ];

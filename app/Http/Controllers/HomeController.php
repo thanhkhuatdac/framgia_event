@@ -48,4 +48,36 @@ class HomeController extends Controller
 
         return $result;
     }
+
+    public function allUsers()
+    {
+        $users = User::getAllNoAdmin()->paginate(12);
+
+        return view('front.home_pages.all_users.all', compact('users'));
+    }
+
+    public function searchAllUsers(Request $request)
+    {
+        if (!$request->ajax()) {
+            return view('errors.403');
+        }
+        $users = User::search($request->keyword)->get();
+        $data = view('front.home_pages.all_users._sections.search_results', compact('users'))->render();
+
+        return $data;
+    }
+
+    public function allFreelancers()
+    {
+        $users = User::getAllFreelancers()->paginate(12);
+
+        return view('front.home_pages.all_users.freelancers', compact('users'));
+    }
+
+    public function allCustomers()
+    {
+        $users = User::getAllCustomers()->paginate(12);
+
+        return view('front.home_pages.all_users.customers', compact('users'));
+    }
 }

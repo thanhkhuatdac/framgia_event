@@ -452,3 +452,15 @@ ul.review-list li .review-replied {
 #btn-add-new-service {
     margin-top: 25px;
 }
+.show-all-user img{
+    width: 120px;
+    height: 95px;
+}
+.btn-view-user>a {
+    background: #2ecc71;
+    border: #2ecc71;
+}
+.btn-view-user>a:hover {
+    background: #e67e22;
+    border: #e67e22;
+}

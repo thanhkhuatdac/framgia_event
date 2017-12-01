@@ -19,6 +19,11 @@ Route::get('event-plans', 'EventPlanController@showAll')->name('allEvents');
 Route::post('search-event-plans', 'EventPlanController@search')->name('searchEvents');
 Route::get('requested-events', 'RequestEventController@showAll')->name('allRequestEvent');
 
+Route::get('all-users', 'HomeController@allUsers')->name('allUsers');
+Route::get('search-all-users', 'HomeController@searchAllUsers')->name('searchAllUsers');
+Route::get('all-freelancers', 'HomeController@allFreelancers')->name('allFreelancers');
+Route::get('all-customers', 'HomeController@allCustomers')->name('allCustomers');
+
 Route::group(['prefix' => 'event-plan'], function () {
     Route::get('/{slug}', 'EventPlanController@getIndex')->name('eventPlanIndex');
     Route::post('add-review/{eventPlanId}', 'EventPlanController@addReview')
