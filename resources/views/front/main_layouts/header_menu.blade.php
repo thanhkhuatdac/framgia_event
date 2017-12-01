@@ -32,6 +32,23 @@
                             {{ trans('header_menu.requestedEvent') }}
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('allUsers') }}">
+                            {{ trans('header_menu.allUsers') }}
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('allFreelancers') }}">
+                                    {{ trans('header_menu.freelancers') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('allCustomers') }}">
+                                    {{ trans('header_menu.customers') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     @if(Auth::check())
                         <li>
                             <a href="{{ route('chatRoom', Auth::user()->id) }}">
