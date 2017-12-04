@@ -36,4 +36,9 @@ class Subject extends Model
     {
         return $query->where('title', 'like', '%' . $keyword . '%');
     }
+
+    public function scopeGetMenuSubjects($query)
+    {
+        return $query->orderBy('id', 'ASC')->limit(6)->get();
+    }
 }

@@ -5,4 +5,5 @@ return [
     'policies' => 'Policies',
     'terms' => 'Terms',
     'blogs' => 'Blogs',
+    'manual' => 'Manual',
 ];
