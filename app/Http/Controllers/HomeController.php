@@ -80,4 +80,9 @@ class HomeController extends Controller
 
         return view('front.home_pages.all_users.customers', compact('users'));
     }
+
+    public function manual()
+    {
+        return view('front.manual.manual');
+    }
 }

@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         view()->composer(['front.main_layouts.header_menu'], function($view){
-            $subjects = Subject::getAllSubjects();
+            $subjects = Subject::getMenuSubjects();
             $view->with([
                 'subjects' => $subjects
             ]);

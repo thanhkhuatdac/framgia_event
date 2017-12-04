@@ -15,4 +15,7 @@ return [
         'yes' => 1,
         'no' => 0,
     ],
+    'documents' => [
+        'manual' => 'documents/',
+    ],
 ];

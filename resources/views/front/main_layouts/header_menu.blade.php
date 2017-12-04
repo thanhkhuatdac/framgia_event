@@ -56,6 +56,13 @@
                                 <i class="fa fa-commenting-o bold"></i>
                             </a>
                         </li>
+                    @else
+                        <li>
+                            <a href="#" id="header-chat-room-notif">
+                                {{ trans('header_menu.chatRoom') }}
+                                <i class="fa fa-commenting-o bold"></i>
+                            </a>
+                        </li>
                     @endif
                 </ul>
             </div>
